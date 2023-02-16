@@ -305,11 +305,16 @@ return [
             'url'  => 'franjas',
             'icon' => 'fas fa-fw fa-business-time',
         ],
-        // [
-        //     'text' => 'Entregas',
-        //     'url'  => 'entregas',
-        //     'icon' => 'fas fa-fw fa-clipboard-check',
-        // ],
+        [
+            'text' => 'Entregas',
+            'url'  => 'entregas',
+            'icon' => 'fas fa-fw fa-clipboard-check',
+        ],
+        [
+            'text' => 'Ir al Inicio',
+            'url'  => '/',
+            'icon' => 'fas fa-fw fa-reply',
+        ],
     ],
 
     /*
@@ -352,18 +357,48 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/jszip.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/pdfmake.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/vfs_fonts.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.html5.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.print.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/jquery.dataTables.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.dataTables.min.css',
                 ],
             ],
         ],
@@ -464,5 +499,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

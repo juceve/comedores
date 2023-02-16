@@ -18,10 +18,9 @@ class EntregaController extends Controller
      */
     public function index()
     {
-        $entregas = Entrega::paginate();
+        
 
-        return view('entrega.index', compact('entregas'))
-            ->with('i', (request()->input('page', 1) - 1) * $entregas->perPage());
+        return view('entrega.index');
     }
 
     /**

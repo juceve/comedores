@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+
 
 /**
  * Class ClienteController
@@ -18,17 +20,19 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::paginate(5);
+        $clientes = Cliente::all();
 
-        return view('cliente.index', compact('clientes'))
-            ->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
+        return view('cliente.index', compact('clientes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function clientesPDF()
+    {
+        $clientes = Cliente::all();
+
+        $pdf = Pdf::loadView('cliente.reportes.clientes', ['clientes'=>$clientes]);
+        return $pdf->stream();
+    }
+
     public function create()
     {
         $cliente = new Cliente();

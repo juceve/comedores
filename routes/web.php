@@ -24,6 +24,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('franjas',FranjaController::class)->names('franjas');
-Route::resource('clientes',ClienteController::class)->names('clientes');
-Route::resource('entregas',EntregaController::class)->names('entregas');
+Route::resource('franjas',FranjaController::class)->middleware('auth')->names('franjas');
+Route::resource('clientes',ClienteController::class)->middleware('auth')->names('clientes');
+Route::resource('entregas',EntregaController::class)->middleware('auth')->names('entregas');

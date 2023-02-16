@@ -5,34 +5,38 @@
 @endsection
 @section('content')
 <div class="container-fluid">
-<h2 class="mt-2 text-secondary">Bienvenido al Control de Comedores</h2>
+    <h2 class="mt-2 text-secondary text-center">Bienvenido al Control de Comedores</h2>
+    <hr>
+    <h4 class="text-secondary">Entregas de Hoy</h4>
     <div class="row mt-3">
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{$clientes->count()}}</h3>
+                    <h3>{{$desayunos->count()}}</h3>
 
-                    <p>Clientes Registrados</p>
+                    <p>Desayunos</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-person-add"></i>
+                    <i class="fas fa-coffee"></i>
                 </div>
-                <a href="/clientes" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/entregas" class="small-box-footer">Mas información <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6 ">
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{$entregas->count()}}</h3>
+                    <h3>{{$almuerzos->count()}}</h3>
 
-                    <p>Entregas del Día</p>
+                    <p>Almuerzos</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-bag"></i>
+                    <i class="fas fa-pizza-slice"></i>
                 </div>
-                <a href="/entregas" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/entregas" class="small-box-footer">Mas información <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -40,28 +44,30 @@
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3>{{$cenas->count()}}</h3>
 
-                    <p>Bounce Rate</p>
+                    <p>Cenas</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fas fa-hamburger"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/entregas" class="small-box-footer">Mas información <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>65</h3>
+                    <h3>{{$lunch->count()}}</h3>
 
-                    <p>Unique Visitors</p>
+                    <p>Lunch's</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="fas fa-cookie"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/entregas" class="small-box-footer">Mas información <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 

@@ -26,7 +26,19 @@ class HomeController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
-        $entregas = Entrega::where('fecha',date('Y-m-d'))->get();
-        return view('home',compact('clientes','entregas'));
+        $desayunos = Entrega::where('fecha', date('Y-m-d'))
+            ->where('franja_id', 1)
+            ->get();
+        $almuerzos = Entrega::where('fecha', date('Y-m-d'))
+            ->where('franja_id', 2)
+            ->get();
+        $cenas = Entrega::where('fecha', date('Y-m-d'))
+            ->where('franja_id', 3)
+            ->get();
+        $lunch = Entrega::where('fecha', date('Y-m-d'))
+            ->where('franja_id', 4)
+            ->orWhere('franja_id', 5)
+            ->get();
+        return view('home', compact('clientes', 'desayunos','almuerzos','cenas','lunch'));
     }
 }
