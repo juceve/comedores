@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\FranjaController;
+use App\Http\Controllers\printPOSController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

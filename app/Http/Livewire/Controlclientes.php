@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\printPOSController;
 use App\Models\Cliente;
 use App\Models\Entrega;
 use App\Models\Franja;
@@ -9,6 +10,8 @@ use Illuminate\Database\Events\TransactionCommitted;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Livewire;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 
 class Controlclientes extends Component
 {
@@ -89,13 +92,34 @@ class Controlclientes extends Component
                         'franja_id' => $this->franja->id,
                     ]);
                     DB::commit();
+                    $this->print($entrega);
                     $this->reset(['cedula', 'cliente']);
                     $this->emit('success', 'Entregado correctamente');
                 } catch (\Throwable $th) {
                     DB::rollback();
-                    $this->emit('error', 'Ha ocurrido un error, no se registró el pedido');
+                    $this->emit('error', $th->getMessage());//'Ha ocurrido un error, no se registró el pedido'
                 }
             }
         }
+    }
+    public function print(Entrega $entrega)
+    {
+        ///// impresion ticket ////////
+        $nombreImpresora = "gprinter1";
+        $connector = new WindowsPrintConnector($nombreImpresora);
+        $impresora = new Printer($connector);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->setTextSize(2, 2);
+        $impresora->text("ENTREGA DE " . $entrega->franja->nombre . "\n");
+        $impresora->setTextSize(2, 1);
+        $impresora->text("---------------------- \n");      
+        $impresora->text("Nro.: " . str_pad($entrega->id, 6, "0", STR_PAD_LEFT) . "\n");
+        $impresora->setTextSize(1, 1);   
+        $impresora->text("Cliente: " . $entrega->cliente->nombre . "\n");             
+        $impresora->text($entrega->created_at . "\n");
+        $impresora->feed(2);
+        $impresora->cut();
+        $impresora->close();
+        ///////////////////////////////
     }
 }
