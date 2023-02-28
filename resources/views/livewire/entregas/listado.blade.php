@@ -18,7 +18,8 @@
             <div class="col-12 col-md-3 mb-3">
                 <label for="">Exportar</label><br>
                 {{-- <button class="btn btn-success btn-sm" style="width: 50px;">Excel</button> --}}
-                <button class="btn btn-danger btn-sm" style="width: 50px;" wire:click='pdf'>PDF</button>
+                <button class="btn btn-danger btn-sm" style="width: 80px;" wire:click='pdf'><i
+                    class="fas fa-file-pdf"></i> PDF</button>
             </div>
         </div>
 

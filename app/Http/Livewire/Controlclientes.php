@@ -8,6 +8,7 @@ use App\Models\Entrega;
 use App\Models\Franja;
 use Illuminate\Database\Events\TransactionCommitted;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 use Livewire\Livewire;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
@@ -92,7 +93,10 @@ class Controlclientes extends Component
                         'franja_id' => $this->franja->id,
                     ]);
                     DB::commit();
-                    $this->print($entrega);
+                    // $this->print($entrega); //LINEA DE IMPRESION SERVIDOR LOCAL
+
+                    $datos = $entrega->id."|".$entrega->franja->nombre."|".$entrega->cliente->nombre."|".$entrega->created_at;
+                    redirect('http://localhost/gprinter/public/print/'.$datos); //IMPRESION MEDIANTE LOCALHOST DEL CLIENTE
                     $this->reset(['cedula', 'cliente']);
                     $this->emit('success', 'Entregado correctamente');
                 } catch (\Throwable $th) {

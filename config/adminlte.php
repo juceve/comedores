@@ -293,8 +293,12 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'home',
-            'icon'        => 'fas fa-fw fa-tachometer-alt', 
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
         ],
+        // [
+        //     'text'    => 'COMEDOR',
+        //     'icon'    => 'fas fa-fw fa-store-alt',
+        //     'submenu' => [
         [
             'text' => 'Clientes',
             'url'  => 'clientes',
@@ -310,6 +314,30 @@ return [
             'url'  => 'entregas',
             'icon' => 'fas fa-fw fa-clipboard-check',
         ],
+        [
+            'text' => 'Reporte Diario',
+            'url'  => 'reporte.diario',
+            'icon' => 'fas fa-fw fa-chart-bar',
+        ],
+        //     ],
+        // ],
+        // [
+        //     'text'    => 'KIOSKOS',
+        //     'icon'    => 'fas fa-fw fa-caravan',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Categorias',
+        //             'url'  => 'categorias',
+        //             'icon' => 'fas fa-fw fa-boxes',
+        //         ],
+        //         [
+        //             'text' => 'Productos',
+        //             'url'  => 'productos',
+        //             'icon' => 'fas fa-fw fa-box',
+        //         ],
+
+        //     ],
+        // ],
         [
             'text' => 'Ir al Inicio',
             'url'  => '/',
@@ -403,7 +431,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

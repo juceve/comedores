@@ -24,8 +24,7 @@
                         </div>
                     </div>
 
-                    <div class="card-body">
-                        
+                    <div class="card-body">                        
                         <div class="form-group">
                             <strong>Nombre:</strong>
                             {{ $franja->nombre }}
@@ -38,7 +37,10 @@
                             <strong>Hora final:</strong>
                             {{ $franja->horafinal }}
                         </div>
-
+                        <div class="form-group">
+                            <strong>Precio:</strong>
+                            {{ $franja->precio }}
+                        </div>
                     </div>
                 </div>
             </div>

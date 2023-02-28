@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFranjasTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('franjas', function (Blueprint $table) {
@@ -18,15 +14,12 @@ class CreateFranjasTable extends Migration
             $table->string('nombre',30);
             $table->string('horainicio');
             $table->string('horafinal');
+            $table->decimal('precio',2)->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+   
     public function down()
     {
         Schema::dropIfExists('franjas');

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoriaproductoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\FranjaController;
-use App\Http\Controllers\printPOSController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Livewire\Entregas\Diario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('franjas',FranjaController::class)->middleware('auth')->names('franjas');
 Route::resource('clientes',ClienteController::class)->middleware('auth')->names('clientes');
 Route::resource('entregas',EntregaController::class)->middleware('auth')->names('entregas');
+Route::get('reporte.diario',Diario::class)->middleware('auth')->name('diario');
+
+Route::resource('categorias', CategoriaproductoController::class)->middleware('auth')->names('categoriaproductos');
+Route::resource('productos', ProductoController::class)->middleware('auth')->names('productos');

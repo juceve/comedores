@@ -23,6 +23,15 @@
     </div>
 </div>
 @section('js')
+@if (session('success'))
+    <script>
+        Swal.fire(
+        'Entregado!',
+        'Entregado correctamente',
+        'success'
+        )
+    </script>
+@endif
 <script>
     document.getElementById("cedula").focus();
 
