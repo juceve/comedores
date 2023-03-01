@@ -24,7 +24,7 @@ class Cliente extends Model
     
     static $rules = [
 		'nombre' => 'required',
-		'cedula' => 'required',
+		'cedula' => 'required|unique:clientes',
 		'estado' => 'required',
     ];
 

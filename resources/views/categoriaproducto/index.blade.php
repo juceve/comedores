@@ -47,19 +47,19 @@ Categoria de productos
 
                                     <td>{{ $categoriaproducto->nombre }}</td>
 
-                                    <td>
+                                    <td align="right">
                                         <form action="{{ route('categoriaproductos.destroy',$categoriaproducto->id) }}"
                                             method="POST">
                                             <a class="btn btn-sm btn-primary "
-                                                href="{{ route('categoriaproductos.show',$categoriaproducto->id) }}"><i
-                                                    class="fa fa-fw fa-eye"></i> Show</a>
+                                                href="{{ route('categoriaproductos.show',$categoriaproducto->id) }}" title="Ver info"><i
+                                                    class="fa fa-fw fa-eye"></i> </a>
                                             <a class="btn btn-sm btn-success"
-                                                href="{{ route('categoriaproductos.edit',$categoriaproducto->id) }}"><i
-                                                    class="fa fa-fw fa-edit"></i> Edit</a>
+                                                href="{{ route('categoriaproductos.edit',$categoriaproducto->id) }}" title="Editar"><i
+                                                    class="fa fa-fw fa-edit"></i> </a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                                    class="fa fa-fw fa-trash"></i> Delete</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"><i
+                                                    class="fa fa-fw fa-trash"></i> </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -78,7 +78,7 @@ Categoria de productos
 <script>
     Swal.fire(
         'Excelente!',
-        'Se registró correctamente',
+        '{{$message}}',
         'success'
     )
 </script>
@@ -91,7 +91,7 @@ Categoria de productos
             "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
         },
         pageLength : 5,
-        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
+        lengthMenu: [[5, 10, 20], [5, 10, 20]],
         
     } );
 } );

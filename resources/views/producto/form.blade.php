@@ -7,23 +7,24 @@
             {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('categoriaproducto_id') }}
-            {{ Form::text('categoriaproducto_id', $producto->categoriaproducto_id, ['class' => 'form-control' . ($errors->has('categoriaproducto_id') ? ' is-invalid' : ''), 'placeholder' => 'Categoriaproducto Id']) }}
+            {{ Form::label('Categoria') }}
+            {{-- {{ Form::text('categoriaproducto_id', $producto->categoriaproducto_id, ['class' => 'form-control' . ($errors->has('categoriaproducto_id') ? ' is-invalid' : ''), 'placeholder' => 'Categoriaproducto Id']) }} --}}
+            {!! Form::select('categoriaproducto_id', $categorias, $producto->categoriaproducto_id?$producto->categoriaproducto_id:null, ['class' => 'form-control' . ($errors->has('categoriaproducto_id') ? ' is-invalid' : ''), 'placeholder' => '- Seleccionar -']) !!}
             {!! $errors->first('categoriaproducto_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('precioventa') }}
-            {{ Form::text('precioventa', $producto->precioventa, ['class' => 'form-control' . ($errors->has('precioventa') ? ' is-invalid' : ''), 'placeholder' => 'Precioventa']) }}
+            {{ Form::label('precio venta') }}
+            {{ Form::number('precioventa', $producto->precioventa, ['step' => 'any','class' => 'form-control' . ($errors->has('precioventa') ? ' is-invalid' : ''), 'placeholder' => 'Precio venta']) }}
             {!! $errors->first('precioventa', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('preciocompra') }}
-            {{ Form::text('preciocompra', $producto->preciocompra, ['class' => 'form-control' . ($errors->has('preciocompra') ? ' is-invalid' : ''), 'placeholder' => 'Preciocompra']) }}
+            {{ Form::label('precio compra') }}
+            {{ Form::number('preciocompra', $producto->preciocompra, ['step' => 'any','class' => 'form-control' . ($errors->has('preciocompra') ? ' is-invalid' : ''), 'placeholder' => 'Precio compra']) }}
             {!! $errors->first('preciocompra', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
     </div>
 </div>

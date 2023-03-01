@@ -19,7 +19,7 @@ class CreateClientesTable extends Migration
             $table->string('cargo',100)->nullable();
             $table->string('empresa',100)->nullable();
             $table->string('cedula',30)->unique();
-            $table->boolean('estado')->default(true);
+            $table->boolean('estado')->default(1);
             $table->timestamps();
         });
     }

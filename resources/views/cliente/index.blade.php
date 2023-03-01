@@ -70,8 +70,7 @@ CLIENTES
                                                     class="fa fa-fw fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"><i
-                                                    class="fa fa-fw fa-trash"></i></button>
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Activar/Desactivar"><i class="fas fa-power-off"></i></button>
                                         </form>
                                     </td>
                                 </tr>

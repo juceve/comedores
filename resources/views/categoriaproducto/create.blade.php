@@ -11,19 +11,20 @@
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
+                <div class="card card-success mt-3">
                     <div class="card-header bg-success">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Registro de Categoria') }}
+                                Nueva Categoria
                             </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('categoriaproductos.index') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
-                                  <i class="fas fa-arrow-left"></i> Volver
+    
+                            <div class="float-right">
+                                <a href="{{ route('categoriaproductos.index') }}"
+                                    class="btn btn-success btn-sm float-right" data-placement="left">
+                                    <i class="fas fa-arrow-left"></i> Volver
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">

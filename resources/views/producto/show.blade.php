@@ -1,20 +1,27 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ $producto->name ?? 'Show Producto' }}
+@section('title')
+Info producto
 @endsection
 
 @section('content')
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card card-success mt-3">
                     <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">Show Producto</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('productos.index') }}"> Back</a>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                            <span id="card_title">
+                                {{ __('Información de Producto') }}
+                            </span>
+    
+                            <div class="float-right">
+                                <a href="{{ route('productos.index') }}"
+                                    class="btn btn-success btn-sm float-right" data-placement="left">
+                                    <i class="fas fa-arrow-left"></i> Volver
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -25,15 +32,15 @@
                             {{ $producto->nombre }}
                         </div>
                         <div class="form-group">
-                            <strong>Categoriaproducto Id:</strong>
-                            {{ $producto->categoriaproducto_id }}
+                            <strong>Categoria:</strong>
+                            {{ $producto->categoriaproducto->nombre }}
                         </div>
                         <div class="form-group">
-                            <strong>Precioventa:</strong>
+                            <strong>Precio venta:</strong>
                             {{ $producto->precioventa }}
                         </div>
                         <div class="form-group">
-                            <strong>Preciocompra:</strong>
+                            <strong>Precio compra:</strong>
                             {{ $producto->preciocompra }}
                         </div>
 

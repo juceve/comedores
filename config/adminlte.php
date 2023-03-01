@@ -295,49 +295,49 @@ return [
             'url'         => 'home',
             'icon'        => 'fas fa-fw fa-tachometer-alt',
         ],
-        // [
-        //     'text'    => 'COMEDOR',
-        //     'icon'    => 'fas fa-fw fa-store-alt',
-        //     'submenu' => [
         [
-            'text' => 'Clientes',
-            'url'  => 'clientes',
-            'icon' => 'fas fa-fw fa-address-book',
+            'text'    => 'COMEDOR',
+            'icon'    => 'fas fa-fw fa-store-alt',
+            'submenu' => [
+                [
+                    'text' => 'Clientes',
+                    'url'  => 'clientes',
+                    'icon' => 'fas fa-fw fa-address-book',
+                ],
+                [
+                    'text' => 'Franjas horarias',
+                    'url'  => 'franjas',
+                    'icon' => 'fas fa-fw fa-business-time',
+                ],
+                [
+                    'text' => 'Entregas',
+                    'url'  => 'entregas',
+                    'icon' => 'fas fa-fw fa-clipboard-check',
+                ],
+                [
+                    'text' => 'Reporte Diario',
+                    'url'  => 'reporte.diario',
+                    'icon' => 'fas fa-fw fa-chart-bar',
+                ],
+            ],
         ],
         [
-            'text' => 'Franjas horarias',
-            'url'  => 'franjas',
-            'icon' => 'fas fa-fw fa-business-time',
-        ],
-        [
-            'text' => 'Entregas',
-            'url'  => 'entregas',
-            'icon' => 'fas fa-fw fa-clipboard-check',
-        ],
-        [
-            'text' => 'Reporte Diario',
-            'url'  => 'reporte.diario',
-            'icon' => 'fas fa-fw fa-chart-bar',
-        ],
-        //     ],
-        // ],
-        // [
-        //     'text'    => 'KIOSKOS',
-        //     'icon'    => 'fas fa-fw fa-caravan',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Categorias',
-        //             'url'  => 'categorias',
-        //             'icon' => 'fas fa-fw fa-boxes',
-        //         ],
-        //         [
-        //             'text' => 'Productos',
-        //             'url'  => 'productos',
-        //             'icon' => 'fas fa-fw fa-box',
-        //         ],
+            'text'    => 'KIOSKOS MÓVILES',
+            'icon'    => 'fas fa-fw fa-caravan',
+            'submenu' => [
+                [
+                    'text' => 'Categorias',
+                    'url'  => 'categorias',
+                    'icon' => 'fas fa-fw fa-boxes',
+                ],
+                [
+                    'text' => 'Productos',
+                    'url'  => 'productos',
+                    'icon' => 'fas fa-fw fa-box',
+                ],
 
-        //     ],
-        // ],
+            ],
+        ],
         [
             'text' => 'Ir al Inicio',
             'url'  => '/',

@@ -29,7 +29,7 @@ class ClienteController extends Controller
     {
         $clientes = Cliente::all();
 
-        $pdf = Pdf::loadView('cliente.reportes.clientes', ['clientes'=>$clientes]);
+        $pdf = Pdf::loadView('cliente.reportes.clientes', ['clientes' => $clientes]);
         return $pdf->stream();
     }
 
@@ -105,9 +105,15 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        $cliente = Cliente::find($id)->delete();
+        $cliente = Cliente::find($id);
+        if ($cliente->estado) {
+            $cliente->estado = 0;
+        } else {
+            $cliente->estado = 1;
+        }
+        $cliente->save();
 
         return redirect()->route('clientes.index')
-            ->with('success', 'Cliente deleted successfully');
+            ->with('success', 'Cliente actualizado');
     }
 }

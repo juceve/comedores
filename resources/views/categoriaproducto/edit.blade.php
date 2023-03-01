@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Update Categoriaproducto
+@section('title')
+    Editar Categoria
 @endsection
 
 @section('content')
@@ -11,9 +11,21 @@
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
+                <div class="card card-success mt-3">
                     <div class="card-header">
-                        <span class="card-title">Update Categoriaproducto</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                            <span id="card_title">
+                                Editar Categoria
+                            </span>
+    
+                            <div class="float-right">
+                                <a href="{{ route('categoriaproductos.index') }}"
+                                    class="btn btn-success btn-sm float-right" data-placement="left">
+                                    <i class="fas fa-arrow-left"></i> Volver
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('categoriaproductos.update', $categoriaproducto->id) }}"  role="form" enctype="multipart/form-data">
