@@ -38,9 +38,9 @@ Franjas
                                     <th>No</th>
 
                                     <th>Nombre</th>
-                                    <th>Horainicio</th>
-                                    <th>Horafinal</th>
-
+                                    <th>Hora inicio</th>
+                                    <th>Hora final</th>
+                                    <th>Precio</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -52,7 +52,7 @@ Franjas
                                     <td>{{ $franja->nombre }}</td>
                                     <td>{{ $franja->horainicio }}</td>
                                     <td>{{ $franja->horafinal }}</td>
-
+                                    <td>{{ $franja->precio }}</td>
                                     <td>
                                         <form action="{{ route('franjas.destroy',$franja->id) }}" method="POST">
                                             <a class="btn btn-sm btn-primary "

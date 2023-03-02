@@ -13,8 +13,9 @@
         </div>
         <div class="form-group">
             {{ Form::label('empresa') }}
-            {{ Form::text('empresa', $cliente->empresa, ['class' => 'form-control' . ($errors->has('empresa') ? ' is-invalid' : ''), 'placeholder' => 'Empresa']) }}
-            {!! $errors->first('empresa', '<div class="invalid-feedback">:message</div>') !!}
+            {{-- {{ Form::text('empresa', $cliente->empresa, ['class' => 'form-control' . ($errors->has('empresa') ? ' is-invalid' : ''), 'placeholder' => 'Empresa']) }} --}}
+            {!! Form::select('empresa_id', $empresas, $cliente->empresa_id?$cliente->empresa_id:null, ['class' => 'form-control' . ($errors->has('empresa_id') ? ' is-invalid' : ''), 'placeholder' => '- Seleccione -']) !!}
+            {!! $errors->first('empresa_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('cedula') }}

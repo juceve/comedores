@@ -38,9 +38,9 @@ CLIENTES
                                     <th>No</th>
 
                                     <th>Nombre</th>
-                                    <th>Cargo</th>
+                                    {{-- <th>Cargo</th> --}}
                                     <th>Empresa</th>
-                                    <th>Cedula</th>
+                                    {{-- <th>Cedula</th> --}}
                                     <th>Estado</th>
 
                                     <th></th>
@@ -55,9 +55,9 @@ CLIENTES
                                     <td>{{ ++$i }}</td>
 
                                     <td>{{ $cliente->nombre }}</td>
-                                    <td>{{ $cliente->cargo }}</td>
-                                    <td>{{ $cliente->empresa }}</td>
-                                    <td>{{ $cliente->cedula }}</td>
+                                    {{-- <td>{{ $cliente->cargo }}</td> --}}
+                                    <td>{{ $cliente->empresa->nombre }}</td>
+                                    {{-- <td>{{ $cliente->cedula }}</td> --}}
                                     <td>{{ $cliente->estado?'ACTIVO':'INACTIVO' }}</td>
 
                                     <td style="width: 150px;" align="right">

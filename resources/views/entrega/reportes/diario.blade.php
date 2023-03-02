@@ -75,7 +75,21 @@
         </table>
     </div>
 
-
+<footer>
+    <br><br><br><br><br><br>
+    <table style="width: 100%">
+        <tr>
+            <td align="center">
+                ______________________ <br>
+                Autorizado por
+            </td>
+            <td align="center">
+                ______________________ <br>
+                Firma Supervisor
+            </td>
+        </tr>
+    </table>
+</footer>
 </body>
 
 </html>

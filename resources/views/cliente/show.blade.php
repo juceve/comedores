@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Empresa:</strong>
-                            {{ $cliente->empresa }}
+                            {{ $cliente->empresa->nombre }}
                         </div>
                         <div class="form-group">
                             <strong>Cedula:</strong>

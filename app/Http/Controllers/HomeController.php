@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Entrega;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -39,6 +40,26 @@ class HomeController extends Controller
             ->where('franja_id', 4)
             ->orWhere('franja_id', 5)
             ->get();
-        return view('home', compact('clientes', 'desayunos','almuerzos','cenas','lunch'));
+        //////////////////////////////////////////////////////////
+        $mensuales = DB::table('entregas')
+        ->join('clientes','clientes.id','=','entregas.cliente_id')  
+        ->join('empresas','empresas.id','=','clientes.empresa_id')      
+        ->whereMonth('entregas.fecha', date('m'))        
+        ->select(DB::raw('count(entregas.id) cantidad, empresas.nombre empresa'))
+        ->groupBy('empresa')
+        ->get();
+        $empresa="";
+        $cantidad="";
+        foreach ($mensuales as $item) {
+            if($empresa==""){
+                $empresa = $item->empresa;
+                $cantidad = $item->cantidad;
+            }else{
+                $empresa = $empresa."|".$item->empresa;
+                $cantidad = $cantidad."|".$item->cantidad;
+            }            
+        }
+        
+        return view('home', compact('clientes', 'desayunos','almuerzos','cenas','lunch','empresa','cantidad'));
     }
 }

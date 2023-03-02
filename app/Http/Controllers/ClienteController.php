@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Empresa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,8 @@ class ClienteController extends Controller
     public function create()
     {
         $cliente = new Cliente();
-        return view('cliente.create', compact('cliente'));
+        $empresas = Empresa::all()->pluck('nombre','id');
+        return view('cliente.create', compact('cliente','empresas'));
     }
 
     /**
@@ -77,8 +79,8 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::find($id);
-
-        return view('cliente.edit', compact('cliente'));
+        $empresas = Empresa::all()->pluck('nombre','id');
+        return view('cliente.edit', compact('cliente','empresas'));
     }
 
     /**

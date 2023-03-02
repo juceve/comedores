@@ -6,6 +6,7 @@ use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\FranjaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Livewire\Entregas\Diario;
+use App\Http\Livewire\Entregas\Productosxempresas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +35,4 @@ Route::get('reporte.diario',Diario::class)->middleware('auth')->name('diario');
 
 Route::resource('categorias', CategoriaproductoController::class)->middleware('auth')->names('categoriaproductos');
 Route::resource('productos', ProductoController::class)->middleware('auth')->names('productos');
+Route::get('reporte.prodxemp', Productosxempresas::class)->name('productosxempresas');

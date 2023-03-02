@@ -21,22 +21,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cliente extends Model
 {
-    
-    static $rules = [
-		'nombre' => 'required',
-		'cedula' => 'required|unique:clientes',
-		'estado' => 'required',
-    ];
 
-    protected $perPage = 20;
+  static $rules = [
+    'nombre' => 'required',
+    'cedula' => 'required|unique:clientes',
+    'estado' => 'required',
+    'empresa_id' => 'required',
+  ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['nombre','cargo','empresa','cedula','estado'];
+  protected $perPage = 20;
 
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['nombre', 'cargo', 'empresa_id', 'cedula', 'estado'];
 
-
+  public function empresa()
+  {
+    return $this->hasOne('App\Models\Empresa', 'id', 'empresa_id');
+  }
 }
