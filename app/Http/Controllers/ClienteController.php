@@ -4,21 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Empresa;
+use App\Models\Loglunch;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ClienteController
  * @package App\Http\Controllers
  */
 class ClienteController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+{   
+
     public function index()
     {
         $clientes = Cliente::all();
@@ -52,6 +49,8 @@ class ClienteController extends Controller
         request()->validate(Cliente::$rules);
 
         $cliente = Cliente::create($request->all());
+        $cliente->lunch = 0;
+        $cliente->save();
 
         return redirect()->route('clientes.index')
             ->with('success', 'Cliente created successfully.');
@@ -66,8 +65,8 @@ class ClienteController extends Controller
     public function show($id)
     {
         $cliente = Cliente::find($id);
-
-        return view('cliente.show', compact('cliente'));
+        $logs = Loglunch::where('cliente_id',$id)->get();
+        return view('cliente.show', compact('cliente','logs'));
     }
 
     /**
@@ -112,6 +111,29 @@ class ClienteController extends Controller
             $cliente->estado = 0;
         } else {
             $cliente->estado = 1;
+        }
+        $cliente->save();
+
+        return redirect()->route('clientes.index')
+            ->with('success', 'Cliente actualizado');
+    }
+
+    public function lunch($id){
+        $cliente = Cliente::find($id);
+        if ($cliente->lunch) {
+            $cliente->lunch = 0;
+            $loglunch = Loglunch::create([
+                "tipo" => "BAJA",
+                "cliente_id" => $id,
+                "user_id" => Auth::user()->id,
+            ]);
+        } else {
+            $cliente->lunch = 1;
+            $loglunch = Loglunch::create([
+                "tipo" => "ALTA",
+                "cliente_id" => $id,
+                "user_id" => Auth::user()->id,
+            ]);
         }
         $cliente->save();
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\printPOSController;
 use App\Models\Cliente;
 use App\Models\Entrega;
 use App\Models\Franja;
+use App\Models\Reservalunch;
 use Illuminate\Database\Events\TransactionCommitted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -92,6 +93,13 @@ class Controlclientes extends Component
                         'cliente_id' => $this->cliente->id,
                         'franja_id' => $this->franja->id,
                     ]);
+
+                    if($this->cliente->lunch){
+                        $reservaLunch = Reservalunch::create([
+                            'fecha' => date('Y-m-d'),
+                            'cliente_id' => $this->cliente->id
+                        ]);
+                    }
                     DB::commit();
                     // $this->print($entrega); //LINEA DE IMPRESION SERVIDOR LOCAL
 

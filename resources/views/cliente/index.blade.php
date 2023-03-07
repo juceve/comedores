@@ -24,11 +24,7 @@ CLIENTES
                         </div>
                     </div>
                 </div>
-                @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-                @endif
+
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -40,7 +36,7 @@ CLIENTES
                                     <th>Nombre</th>
                                     {{-- <th>Cargo</th> --}}
                                     <th>Empresa</th>
-                                    {{-- <th>Cedula</th> --}}
+                                    <th>Lunch</th>
                                     <th>Estado</th>
 
                                     <th></th>
@@ -58,20 +54,56 @@ CLIENTES
                                     {{-- <td>{{ $cliente->cargo }}</td> --}}
                                     <td>{{ $cliente->empresa->nombre }}</td>
                                     {{-- <td>{{ $cliente->cedula }}</td> --}}
-                                    <td>{{ $cliente->estado?'ACTIVO':'INACTIVO' }}</td>
+
+                                    <td>
+                                        @if ($cliente->lunch)
+                                        <span style="width: 60px;" class="badge rounded-pill bg-success">Activo</span>
+                                        @else
+                                        <span style="width: 60px;"
+                                            class="badge rounded-pill bg-secondary">Inactivo</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($cliente->estado)
+                                        <span style="width: 60px;" class="badge rounded-pill bg-success">Activo</span>
+                                        @else
+                                        <span style="width: 60px;"
+                                            class="badge rounded-pill bg-secondary">Inactivo</span>
+                                        @endif
+                                    </td>
 
                                     <td style="width: 150px;" align="right">
-                                        <form action="{{ route('clientes.destroy',$cliente->id) }}" method="POST">
-                                            <a class="btn btn-sm btn-primary "
-                                                href="{{ route('clientes.show',$cliente->id) }}" title="Ver info"><i
-                                                    class="fa fa-fw fa-eye"></i></a>
-                                            <a class="btn btn-sm btn-success"
-                                                href="{{ route('clientes.edit',$cliente->id) }}" title="Editar"><i
-                                                    class="fa fa-fw fa-edit"></i></a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Activar/Desactivar"><i class="fas fa-power-off"></i></button>
-                                        </form>
+
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                                Acciones
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item"
+                                                    href="{{ route('clientes.show',$cliente->id) }}"><i
+                                                        class="fa fa-fw fa-eye text-gray"></i> Ver info</a>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('clientes.edit',$cliente->id) }}"><i
+                                                        class="fa fa-fw fa-edit text-gray"></i> Editar</a>
+                                                <form action="{{ route('lunch',$cliente->id) }}" onsubmit="return false"
+                                                    method="POST" class="actdesc-lunch">
+                                                    @csrf
+
+                                                    <button type="submit" class="dropdown-item"><i
+                                                            class="fas fa-power-off text-gray"></i> Act/Des
+                                                        Lunch</button>
+                                                </form>
+                                                <form action="{{ route('clientes.destroy',$cliente->id) }}"
+                                                    onsubmit="return false" method="POST" class="actdesc-cliente">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item"><i
+                                                            class="fas fa-power-off text-gray"></i> Act/Des
+                                                        Cliente</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -86,6 +118,15 @@ CLIENTES
 </div>
 @endsection
 @section('js')
+@if ($message = Session::get('success'))
+<script>
+    Swal.fire(
+  'Excelente!',
+  '{{ $message }}',
+  'success'
+)
+</script>
+@endif
 <script>
     $(document).ready(function() {
         var hoy = new Date();
@@ -117,5 +158,41 @@ CLIENTES
     ]
     } );
 } );
+</script>
+
+<script>
+    $('.actdesc-lunch').submit(function(e){
+        Swal.fire({
+        title: 'CAMBIAR ESTADO LUNCH',
+        text: "Esta seguro de realizar esta operación?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, continuar!',
+        cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            this.submit();
+        }
+        })
+    });
+
+    $('.actdesc-cliente').submit(function(e){
+        Swal.fire({
+            title: 'CAMBIAR ESTADO CLIENTE',
+        text: "Esta seguro de realizar esta operación?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, continuar!',
+        cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            this.submit();
+        }
+        })
+    });
 </script>
 @endsection

@@ -21,6 +21,7 @@ class CreateClientesTable extends Migration
             $table->foreignId('empresa_id')->nullable()->constrained()->nullOnDelete();
             $table->string('cedula',30)->unique();
             $table->boolean('estado')->default(1);
+            $table->boolean('lunch')->default(0);
             $table->timestamps();
         });
     }

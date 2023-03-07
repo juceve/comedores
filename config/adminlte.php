@@ -315,12 +315,27 @@ return [
             'icon' => 'fas fa-fw fa-clipboard-check',
         ],
         [
+            'text' => 'Reserva de Lunches',
+            'url'  => 'reservalunches',
+            'icon' => 'far fa-calendar-check',
+        ],
+        [
             'text'    => 'REPORTES',
-            'icon'    => 'fas fa-fw fa-store-alt',
+            'icon'    => 'fas fa-fw fa-chart-pie',
             'submenu' => [
                 [
-                    'text' => 'Reporte Diario',
+                    'text' => 'Entregas Diarias',
                     'url'  => 'reporte.diario',
+                    'icon' => 'fas fa-fw fa-chart-bar',
+                ],
+                [
+                    'text' => 'Productos por Empresa',
+                    'url'  => 'reporte.prodxemp',
+                    'icon' => 'fas fa-fw fa-chart-bar',
+                ],
+                [
+                    'text' => 'Aprobaciones de Lunches',
+                    'url'  => 'reporte.aprobaciones',
                     'icon' => 'fas fa-fw fa-chart-bar',
                 ],
             ],
@@ -469,7 +484,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],

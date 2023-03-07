@@ -23,6 +23,11 @@
             {!! $errors->first('cedula', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group d-none">
+            {{ Form::label('Lunch') }}
+            {{ Form::text('lunch', is_null($cliente->lunch)?1:$cliente->lunch, ['class' => 'form-control' . ($errors->has('lunch') ? ' is-invalid' : ''), 'placeholder' => 'lunch']) }}
+            {!! $errors->first('lunch', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group d-none">
             {{ Form::label('estado') }}
             {{ Form::text('estado', is_null($cliente->estado)?1:$cliente->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
             {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
