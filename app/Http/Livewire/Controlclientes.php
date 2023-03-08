@@ -55,16 +55,19 @@ class Controlclientes extends Component
             $this->cliente = Cliente::where('cedula', $this->cedula)->first();
 
             if (!is_null($this->cliente)) {
-
-                $entrega = Entrega::where('fecha', date('Y-m-d'))
-                    ->where('cliente_id', $this->cliente->id)
-                    ->where('franja_id', $this->franja->id)
-                    ->get();
-                if ($entrega->count() > 0) {
-                    $this->emit('error', 'YA SE RECOGIÓ ' . $this->franja->nombre . ' PARA EL CLIENTE SELECCIONADO.');
+                if (($this->cliente->lunch == 1) && $this->franja->id == 2) {
+                    $this->emit('error', 'Cliente no habilitado para ' . $this->franja->nombre . ' por contar con LUNCH');
                 } else {
-                    $cadenaResultado = $this->cliente->id . "|" . $this->cliente->nombre . "|" . $this->franja->nombre . "|" . $this->cliente->empresa . "|" . $this->cliente->cedula;
-                    $this->emit('inicioRegistro', $cadenaResultado);
+                    $entrega = Entrega::where('fecha', date('Y-m-d'))
+                        ->where('cliente_id', $this->cliente->id)
+                        ->where('franja_id', $this->franja->id)
+                        ->get();
+                    if ($entrega->count() > 0) {
+                        $this->emit('error', 'YA SE RECOGIÓ ' . $this->franja->nombre . ' PARA EL CLIENTE SELECCIONADO.');
+                    } else {
+                        $cadenaResultado = $this->cliente->id . "|" . $this->cliente->nombre . "|" . $this->franja->nombre . "|" . $this->cliente->empresa . "|" . $this->cliente->cedula;
+                        $this->emit('inicioRegistro', $cadenaResultado);
+                    }
                 }
             } else {
                 $this->reset(['cedula', 'cliente']);
@@ -94,7 +97,7 @@ class Controlclientes extends Component
                         'franja_id' => $this->franja->id,
                     ]);
 
-                    if($this->cliente->lunch){
+                    if ($this->cliente->lunch) {
                         $reservaLunch = Reservalunch::create([
                             'fecha' => date('Y-m-d'),
                             'cliente_id' => $this->cliente->id
@@ -103,13 +106,13 @@ class Controlclientes extends Component
                     DB::commit();
                     // $this->print($entrega); //LINEA DE IMPRESION SERVIDOR LOCAL
 
-                    $datos = $entrega->id."|".$entrega->franja->nombre."|".$entrega->cliente->nombre."|".$entrega->created_at;
-                    redirect('http://localhost/gprinter/public/print/'.$datos); //IMPRESION MEDIANTE LOCALHOST DEL CLIENTE
+                    $datos = $entrega->id . "|" . $entrega->franja->nombre . "|" . $entrega->cliente->nombre . "|" . $entrega->created_at;
+                    redirect('http://localhost/gprinter/public/print/' . $datos); //IMPRESION MEDIANTE LOCALHOST DEL CLIENTE
                     $this->reset(['cedula', 'cliente']);
                     $this->emit('success', 'Entregado correctamente');
                 } catch (\Throwable $th) {
                     DB::rollback();
-                    $this->emit('error', $th->getMessage());//'Ha ocurrido un error, no se registró el pedido'
+                    $this->emit('error', $th->getMessage()); //'Ha ocurrido un error, no se registró el pedido'
                 }
             }
         }
@@ -124,10 +127,10 @@ class Controlclientes extends Component
         $impresora->setTextSize(2, 2);
         $impresora->text("ENTREGA DE " . $entrega->franja->nombre . "\n");
         $impresora->setTextSize(2, 1);
-        $impresora->text("---------------------- \n");      
+        $impresora->text("---------------------- \n");
         $impresora->text("Nro.: " . str_pad($entrega->id, 6, "0", STR_PAD_LEFT) . "\n");
-        $impresora->setTextSize(1, 1);   
-        $impresora->text("Cliente: " . $entrega->cliente->nombre . "\n");             
+        $impresora->setTextSize(1, 1);
+        $impresora->text("Cliente: " . $entrega->cliente->nombre . "\n");
         $impresora->text($entrega->created_at . "\n");
         $impresora->feed(2);
         $impresora->cut();
