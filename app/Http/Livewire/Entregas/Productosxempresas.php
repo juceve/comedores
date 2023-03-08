@@ -2,21 +2,26 @@
 
 namespace App\Http\Livewire\Entregas;
 
+use App\Exports\prodxempExport;
 use App\Models\Empresa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Productosxempresas extends Component
 {
     public $fechai, $fechaf, $empresas;
     public $selectedEmpresas = array(), $contenedor = null;
+    public $incluirTodas = false;
 
     public function mount()
     {
         $this->fechai = date('Y-m-d');
         $this->fechaf = date('Y-m-d');
-        $this->empresas = Empresa::all();
+        $this->reset(['empresas']);
+
+        $this->empresas = Empresa::where('reportes', 1)->get();
     }
 
     public function updatedSelectedEmpresas()
@@ -27,6 +32,15 @@ class Productosxempresas extends Component
     public function updatedFechai()
     {
         $this->emit('updateSelect2');
+    }
+    public function updatedIncluirTodas()
+    {
+        $this->emit('updateSelect2');
+        if ($this->incluirTodas) {
+            $this->empresas = Empresa::all();
+        } else {
+            $this->empresas = Empresa::where('reportes', 1)->get();
+        }
     }
 
     public function updatedFechaf()
@@ -58,10 +72,9 @@ class Productosxempresas extends Component
         ORDER BY em.nombre, f.id";
 
         $entregas = DB::select($sql);
-        
+        $contenedor = [];
+        $this->reset(['contenedor']);
         if (count($entregas)) {
-            $contenedor = [];
-
             $empresa = "";
             $data = null;
             $totalCantidad = 0;
@@ -100,5 +113,10 @@ class Productosxempresas extends Component
             fn () => print($pdf),
             "Reporte_ProdXEmp_" . date('Y-m-d') . date('_His') . ".pdf"
         );
+    }
+
+    public function excel(){
+        $this->emit('updateSelect2');
+        return Excel::download(new prodxempExport($this->contenedor,$this->fechai, $this->fechaf), 'Rep_prodxemp_'.date('His').'.xlsx');
     }
 }

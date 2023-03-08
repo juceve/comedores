@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Entregas;
 
+use App\Exports\EntregaExport;
 use App\Models\Franja;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Diario extends Component
 {
@@ -50,9 +52,6 @@ class Diario extends Component
                 $this->contenedor[] = $resultado;
             }
         }
-
-
-
         return view('livewire.entregas.diario', compact('franjas'))->extends('adminlte::page');
     }
 
@@ -77,5 +76,10 @@ class Diario extends Component
             fn () => print($pdf),
             "Reporte_Entregas_" . $this->fecha . date('_His') . ".pdf"
         );
+    }
+
+    public function excel(){
+        $this->emit('updateSelect2');
+        return Excel::download(new EntregaExport($this->contenedor,$this->fecha), 'Rep_EntregasDiarias_'.$this->fecha.'_'.date('His').'.xlsx');
     }
 }

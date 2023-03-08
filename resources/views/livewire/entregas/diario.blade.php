@@ -21,12 +21,20 @@
 
                     </div>
                     <div class="col-12 col-md-3 mb-3">
-                        <label for="">Exportar</label><br>
-                        {{-- <button class="btn btn-success" style="width: 100px;" wire:click='buscar'><i
-                                class="fas fa-search"></i> Buscar</button> --}}
-                        <button class="btn btn-danger " style="width: 100px;" wire:click='pdf'><i
-                                class="fas fa-file-pdf"></i> PDF</button>
+                        <label for="">Exportar</label>
+                        <div class="row">
+                            <div class="col-6">
+                                <button class="btn btn-danger btn-block" wire:click='pdf'><i class="fas fa-file-pdf"></i>
+                                    PDF</button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-success btn-block" wire:click='excel'><i class="fas fa-file-excel"></i>
+                                    Excel</button>
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
 
             </div>

@@ -340,27 +340,6 @@ return [
                 ],
             ],
         ],
-
-
-        //     ],
-        // ],
-        // [
-        //     'text'    => 'KIOSKOS MÓVILES',
-        //     'icon'    => 'fas fa-fw fa-caravan',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Categorias',
-        //             'url'  => 'categorias',
-        //             'icon' => 'fas fa-fw fa-boxes',
-        //         ],
-        //         [
-        //             'text' => 'Productos',
-        //             'url'  => 'productos',
-        //             'icon' => 'fas fa-fw fa-box',
-        //         ],
-
-        //     ],
-        // ],
         [
             'text' => 'Ir al Inicio',
             'url'  => '/',

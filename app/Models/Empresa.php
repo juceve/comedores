@@ -29,7 +29,7 @@ class Empresa extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre','reportes'];
 
     public function clientes()
     {

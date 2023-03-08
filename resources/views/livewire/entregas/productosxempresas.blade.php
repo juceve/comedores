@@ -16,21 +16,43 @@
                     </div>
                     <div class="col-12 col-md-6 mb-3">
                         <label for="">Empresas</label>
-                        <select class="select2" multiple="multiple" style="width: 100%" wire:model='selectedEmpresas'>
-                            @if (!is_null($empresas))
-                            @foreach ($empresas as $empresa)
-                            <option value="{{$empresa->id}}">{{$empresa->nombre}}</option>
-                            @endforeach
-                            @endif
+                        <div class="row">
+                            <div class="col-12 col-md-9">
+                                <select class="select2" multiple="multiple" style="width: 100%"
+                                    wire:model='selectedEmpresas'>
+                                    @if (!is_null($empresas))
+                                    @foreach ($empresas as $empresa)
+                                    <option value="{{$empresa->id}}">{{$empresa->nombre}}</option>
+                                    @endforeach
+                                    @endif
 
-                        </select>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="incluir"
+                                        wire:model="incluirTodas">
+                                    <label class="form-check-label" for="incluir"><small>Incluir Todas</small></label>
+                                </div>
+                            </div>
+                        </div>
+
+
 
                     </div>
+                    @if (!is_null($contenedor))
                     <div class="col-12 col-md-3 mb-3">
                         <button class="btn btn-danger " style="width: 100%;" wire:click='pdf'><i
                                 class="fas fa-file-pdf"></i>
                             Exportar PDF</button>
                     </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <button class="btn btn-success " style="width: 100%;" wire:click='excel'><i
+                                class="fas fa-file-excel"></i>
+                            Exportar Excel</button>
+                    </div>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -38,8 +60,8 @@
     </div>
     <div class="row">
         <div class="col-12">
-            
-        @if (!is_null($contenedor))
+
+            @if (!is_null($contenedor))
             <div class="card">
                 <div class="card-body">
                     <h2 class="text-secondary text-center">REPORTE DE PRODUCTOS ENTREGADOS POR EMPRESA</h2>
@@ -54,48 +76,53 @@
                                     <th style="width: 150px">IMPORTE Bs.</th>
                                 </tr>
                             </thead>
-                            
-                                @php
-                                $totalImporte = 0;
-                                @endphp
-                                @foreach ($contenedor as $item)
-                                    <tr class="table-secondary">
-                                        <td colspan="2"><b> {{$item[0]}}</b></td>
-                                        <td align="right"><b> {{$item[1]}}</b></td>
-                                        <td align="right"><b> {{number_format($item[3], 2, '.', '');}}</b></td>
-                                    </tr>
-                                    @php
-                                        $totalImporte = $totalImporte + $item[3];                                    
-                                        $datas = $item[2];
-                                    @endphp
-                                    @if (count($datas))
-                                        @foreach ($datas as $data)
-                                        <tr>
-                                            <td></td>
-                                            <td>{{$data[0]}}</td>
-                                            <td align="right">{{$data[1]}}</td>
-                                            <td align="right">{{$data[2]}}</td>
-                                        </tr>
-                                        @endforeach
-                                    @endif
 
-                                @endforeach
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="2"></td>
-                                        <td class="bg-dark" align="right"><b>IMPORTE TOTAL</b></td>
-                                        <td class="bg-dark" align="right"><b>{{number_format($totalImporte, 2, '.',
-                                                '');}}</b>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            
-                            
+                            @php
+                            $totalImporte = 0;
+                            @endphp
+                            @foreach ($contenedor as $item)
+                            <tr class="table-secondary">
+                                <td colspan="2"><b> {{$item[0]}}</b></td>
+                                <td align="right"><b> {{$item[1]}}</b></td>
+                                <td align="right"><b> {{number_format($item[3], 2, '.', ',');}}</b></td>
+                            </tr>
+                            @php
+                            $totalImporte = $totalImporte + $item[3];
+                            $datas = $item[2];
+                            @endphp
+                            @if (count($datas))
+                            @foreach ($datas as $data)
+                            <tr>
+                                <td></td>
+                                <td>{{$data[0]}}</td>
+                                <td align="right">{{$data[1]}}</td>
+                                <td align="right">{{$data[2]}}</td>
+                            </tr>
+                            @endforeach
+                            @endif
+
+                            @endforeach
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td class="bg-dark" align="right"><b>IMPORTE TOTAL</b></td>
+                                    <td class="bg-dark" align="right"><b>{{number_format($totalImporte, 2, '.',
+                                            ',');}}</b>
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+
                         </table>
                     </div>
 
                 </div>
             </div>
+            @else
+            <div class="content text-center">
+                <span>Sin resultados para mostrar!</span>
+            </div>
+            
             @endif
         </div>
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriaproductoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EntregaController;
+use App\Http\Controllers\exportExcelController;
 use App\Http\Controllers\FranjaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ReservalunchController;
@@ -38,9 +39,10 @@ Route::post('lunch/{id}',[ClienteController::class,'lunch'])->middleware('auth')
 
 Route::resource('entregas',EntregaController::class)->middleware('auth')->names('entregas');
 Route::get('reporte.diario',Diario::class)->middleware('auth')->name('diario');
+Route::get('excel/entregasdiarias',[exportExcelController::class,'exportEntregasDiaria'])->name('excel.entregasDiarias');
 
-Route::resource('categorias', CategoriaproductoController::class)->middleware('auth')->names('categoriaproductos');
-Route::resource('productos', ProductoController::class)->middleware('auth')->names('productos');
+// Route::resource('categorias', CategoriaproductoController::class)->middleware('auth')->names('categoriaproductos');
+// Route::resource('productos', ProductoController::class)->middleware('auth')->names('productos');
 Route::get('reporte.prodxemp', Productosxempresas::class)->name('productosxempresas');
 Route::get('reporte.general', General::class)->name('general');
 Route::resource('reservalunches', ReservalunchController::class)->middleware('auth')->names('reservalunches');
