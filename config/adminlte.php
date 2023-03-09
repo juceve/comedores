@@ -315,11 +315,6 @@ return [
             'icon' => 'fas fa-fw fa-clipboard-check',
         ],
         [
-            'text' => 'Reserva de Lunches',
-            'url'  => 'reservalunches',
-            'icon' => 'far fa-calendar-check',
-        ],
-        [
             'text'    => 'REPORTES',
             'icon'    => 'fas fa-fw fa-chart-pie',
             'submenu' => [
@@ -331,11 +326,6 @@ return [
                 [
                     'text' => 'Productos por Empresa',
                     'url'  => 'reporte.prodxemp',
-                    'icon' => 'fas fa-fw fa-chart-bar',
-                ],
-                [
-                    'text' => 'Aprobaciones de Lunches',
-                    'url'  => 'reporte.aprobaciones',
                     'icon' => 'fas fa-fw fa-chart-bar',
                 ],
             ],

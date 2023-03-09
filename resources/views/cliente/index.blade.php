@@ -32,13 +32,9 @@ CLIENTES
                             <thead class="thead">
                                 <tr>
                                     <th>No</th>
-
-                                    <th>Nombre</th>
-                                    {{-- <th>Cargo</th> --}}
-                                    <th>Empresa</th>
-                                    <th>Lunch</th>
+                                    <th>Nombre</th>                                    
+                                    <th>Empresa</th>                                    
                                     <th>Estado</th>
-
                                     <th></th>
                                 </tr>
                             </thead>
@@ -49,20 +45,8 @@ CLIENTES
                                 @foreach ($clientes as $cliente)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-
                                     <td>{{ $cliente->nombre }}</td>
-                                    {{-- <td>{{ $cliente->cargo }}</td> --}}
                                     <td>{{ $cliente->empresa->nombre }}</td>
-                                    {{-- <td>{{ $cliente->cedula }}</td> --}}
-
-                                    <td>
-                                        @if ($cliente->lunch)
-                                        <span style="width: 60px;" class="badge rounded-pill bg-success">Activo</span>
-                                        @else
-                                        <span style="width: 60px;"
-                                            class="badge rounded-pill bg-secondary">Inactivo</span>
-                                        @endif
-                                    </td>
                                     <td>
                                         @if ($cliente->estado)
                                         <span style="width: 60px;" class="badge rounded-pill bg-success">Activo</span>
@@ -86,14 +70,6 @@ CLIENTES
                                                 <a class="dropdown-item"
                                                     href="{{ route('clientes.edit',$cliente->id) }}"><i
                                                         class="fa fa-fw fa-edit text-gray"></i> Editar</a>
-                                                <form action="{{ route('lunch',$cliente->id) }}" onsubmit="return false"
-                                                    method="POST" class="actdesc-lunch">
-                                                    @csrf
-
-                                                    <button type="submit" class="dropdown-item"><i
-                                                            class="fas fa-power-off text-gray"></i> Act/Des
-                                                        Lunch</button>
-                                                </form>
                                                 <form action="{{ route('clientes.destroy',$cliente->id) }}"
                                                     onsubmit="return false" method="POST" class="actdesc-cliente">
                                                     @csrf
@@ -161,23 +137,6 @@ CLIENTES
 </script>
 
 <script>
-    $('.actdesc-lunch').submit(function(e){
-        Swal.fire({
-        title: 'CAMBIAR ESTADO LUNCH',
-        text: "Esta seguro de realizar esta operación?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, continuar!',
-        cancelButtonText: 'No, cancelar'
-        }).then((result) => {
-        if (result.isConfirmed) {
-            this.submit();
-        }
-        })
-    });
-
     $('.actdesc-cliente').submit(function(e){
         Swal.fire({
             title: 'CAMBIAR ESTADO CLIENTE',

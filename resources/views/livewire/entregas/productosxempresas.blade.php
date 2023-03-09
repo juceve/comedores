@@ -32,7 +32,7 @@
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="incluir"
                                         wire:model="incluirTodas">
-                                    <label class="form-check-label" for="incluir"><small>Incluir Todas</small></label>
+                                    <label class="form-check-label" for="incluir"><small>Incluir Contratistas</small></label>
                                 </div>
                             </div>
                         </div>

@@ -51,42 +51,42 @@ INFO CLIENTE
                         <span style="width: 60px;" class="badge rounded-pill bg-secondary">Inactivo</span>
                         @endif
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <strong>Lunch:</strong>
                         @if ($cliente->lunch)
                         <span style="width: 60px;" class="badge rounded-pill bg-success">Activo</span>
                         @else
                         <span style="width: 60px;" class="badge rounded-pill bg-secondary">Inactivo</span>
                         @endif
-                    </div>
-                    <hr>
-                    @if ($logs->count() > 0)
-                       <div class="content">
+                    </div> --}}
+                    {{-- <hr> --}}
+                    {{-- @if ($logs->count() > 0)
+                    <div class="content">
                         <h5><strong>Registro de Activaciones Lunches</strong></h5>
                         <div class="table-responsive">
                             <table class="table table-bordered table-sm table-striped">
                                 <thead>
-                                   <tr class="table-primary">
-                                    <th style="width: 33%">FECHA</th>
-                                    <th style="width: 33%">TIPO</th>
-                                    <th style="width: 34%">AUTORIZADO POR</th>
-                                </tr> 
+                                    <tr class="table-primary">
+                                        <th style="width: 33%">FECHA</th>
+                                        <th style="width: 33%">TIPO</th>
+                                        <th style="width: 34%">AUTORIZADO POR</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($logs as $log)
-                                      <tr>
+                                    <tr>
                                         <td>{{$log->created_at}}</td>
                                         <td>{{$log->tipo}}</td>
                                         <td>{{$log->user->name}}</td>
-                                    </tr>  
+                                    </tr>
                                     @endforeach
-                                    
+
                                 </tbody>
                             </table>
                         </div>
-                    </div> 
-                    @endif
-                    
+                    </div>
+                    @endif --}}
+
 
                 </div>
             </div>
