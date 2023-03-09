@@ -1,9 +1,9 @@
 <table>
     <tr>
-        <td colspan="5" align="center">REPORTE DIARIO DE ENTREGAS</td>        
+        <td colspan="5" align="center">REPORTE DE ENTREGAS</td>        
     </tr>
     <tr>
-        <td colspan="5" align="center">Fecha: {{$fecha}}</td>
+        <td colspan="5" align="center">Del {{$fechai}} al {{$fechaf}}</td>
     </tr>
     <thead>
         <tr>

@@ -10,19 +10,21 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class EntregaExport implements FromView, ShouldAutoSize
 {
-    public $contenedor, $fecha;
+    public $contenedor, $fechai, $fechaf;
 
-    public function __construct($contenedor,$fecha)
+    public function __construct($contenedor,$fechai, $fechaf)
     {
         $this->contenedor = $contenedor;
-        $this->fecha = $fecha;
+        $this->fechai = $fechai;
+        $this->fechaf = $fechaf;
     }
 
     public function view(): View
     {
         return view('entrega.reportes.excel.diario', [
             "contenedor" => $this->contenedor,
-            "fecha" => $this->fecha,
+            "fechai" => $this->fechai,
+            "fechaf" => $this->fechaf,
         ]);
     }
 }

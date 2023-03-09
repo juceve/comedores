@@ -30,6 +30,7 @@
 </head>
 
 <body>
+    <img src="{{asset('images/logoAR.png')}}" style="width: 120px;">
     <div class="content text-center">
         <h4>REPORTE DE PRODUCTOS ENTREGADOS POR EMPRESA</h4>
         <span><strong>Fecha: </strong>Del {{$fechai}} al {{$fechaf}}</span>

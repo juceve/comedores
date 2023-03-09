@@ -30,9 +30,10 @@
 </head>
 
 <body>
+    <img src="{{asset('images/logoAR.png')}}" style="width: 120px;">
     <div class="content text-center">
-        <h4>REPORTE DIARIO DE ENTREGAS</h4>
-        <span><strong>Fecha: </strong>{{$fecha}}</span>
+        <h4>REPORTE DE ENTREGAS</h4>
+        <span>Del {{$fechai}} al {{$fechaf}}</span>
     </div>
 <br>
     <div class="container">

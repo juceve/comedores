@@ -16,13 +16,14 @@ class Diario extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $fecha;
+    public $fechai,$fechaf;
     public $selectedFranjas = array();
     public $contenedor = null;
 
     public function mount()
     {
-        $this->fecha = date('Y-m-d');
+        $this->fechai = date('Y-m-d');
+        $this->fechaf = date('Y-m-d');
     }
 
     public function updatedSelectedFranjas()
@@ -30,7 +31,11 @@ class Diario extends Component
         $this->emit('updateSelect2');
     }
 
-    public function updatedFecha()
+    public function updatedFechai()
+    {
+        $this->emit('updateSelect2');
+    }
+    public function updatedFechaf()
     {
         $this->emit('updateSelect2');
     }
@@ -42,25 +47,25 @@ class Diario extends Component
         $count = count($this->selectedFranjas);
         if (count($this->selectedFranjas) == 0) {
             foreach ($franjas as $franja) {
-                $resultado = $this->buscador($this->fecha, $franja->id);
+                $resultado = $this->buscador($this->fechai, $this->fechaf, $franja->id);
                 $this->contenedor[] = $resultado;
             }
         } else {
             foreach ($this->selectedFranjas as $franja) {
 
-                $resultado = $this->buscador($this->fecha, $franja);
+                $resultado = $this->buscador($this->fechai, $this->fechaf, $franja);
                 $this->contenedor[] = $resultado;
             }
         }
         return view('livewire.entregas.diario', compact('franjas'))->extends('adminlte::page');
     }
 
-    public function buscador($fecha, $franja_id)
+    public function buscador($fechai, $fechaf, $franja_id)
     {
         $franja = Franja::find($franja_id);
         $entregas = DB::table('entregas')
-            ->rightJoin('franjas', 'franjas.id', '=', 'entregas.franja_id')
-            ->where('entregas.fecha', $fecha)
+            ->rightJoin('franjas', 'franjas.id', '=', 'entregas.franja_id')            
+            ->whereBetween('entregas.fecha', [$fechai, $fechaf])
             ->where('entregas.franja_id', $franja_id)
             ->select(DB::raw('count(entregas.id) as cant, sum(franjas.precio) as total'))
             ->first();
@@ -71,15 +76,15 @@ class Diario extends Component
     public function pdf()
     {
         $this->emit('updateSelect2');
-        $pdf = Pdf::loadView('entrega.reportes.diario', ['contenedor' => $this->contenedor, 'fecha' => $this->fecha])->output();
+        $pdf = Pdf::loadView('entrega.reportes.diario', ['contenedor' => $this->contenedor, 'fechai' => $this->fechai, 'fechaf' => $this->fechaf])->output();
         return response()->streamDownload(
             fn () => print($pdf),
-            "Reporte_Entregas_" . $this->fecha . date('_His') . ".pdf"
+            "Reporte_Entregas_" . date('His') . ".pdf"
         );
     }
 
     public function excel(){
         $this->emit('updateSelect2');
-        return Excel::download(new EntregaExport($this->contenedor,$this->fecha), 'Rep_EntregasDiarias_'.$this->fecha.'_'.date('His').'.xlsx');
+        return Excel::download(new EntregaExport($this->contenedor,$this->fechai,$this->fechaf), 'Rep_Entregas_'.date('His').'.xlsx');
     }
 }

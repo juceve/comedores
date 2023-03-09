@@ -30,6 +30,7 @@
 </head>
 
 <body>
+    <img src="{{asset('images/logoAR.png')}}" style="width: 120px;">
     <div class="content text-center mb-3">
         <h2>LISTADO DE ENTREGAS</h2>
         <small>Del {{$fechai}} al {{$fechaf}} </small><br>

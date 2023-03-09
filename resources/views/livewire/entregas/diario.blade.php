@@ -1,14 +1,17 @@
 <div>
     <div class="card  card-success mt-3">
         <div class="card-header">
-            Reporte diario de Entregas
+            Reporte de Entregas
         </div>
         <div class="card-body">
             <div class="content">
                 <div class="row">
                     <div class="col-12 col-md-3 mb-3">
-                        <label for="">Fecha</label>
-                        <input type="date" class="form-control " value="{{date('Y-m-d')}}" wire:model="fecha">
+                        <label for="">Fecha Inicio</label>
+                        <input type="date" class="form-control " value="{{date('Y-m-d')}}" wire:model="fechai">
+                    </div><div class="col-12 col-md-3 mb-3">
+                        <label for="">Fecha Fin</label>
+                        <input type="date" class="form-control " value="{{date('Y-m-d')}}" wire:model="fechaf">
                     </div>
                     <div class="col-12 col-md-3 mb-3">
                         <label for="">Franjas</label>
@@ -40,8 +43,8 @@
             </div>
             <hr>
             <div class="content text-center">
-                <h4>REPORTE DIARIO DE ENTREGAS</h4>
-                <span><strong>Fecha: </strong>{{$fecha}}</span>
+                <h4>REPORTE DE ENTREGAS</h4>
+                <span>Del <strong>{{$fechai}}</strong> al <strong>{{$fechaf}}</strong></span>
             </div>
 
             <div class="table-responsive">
