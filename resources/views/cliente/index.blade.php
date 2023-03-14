@@ -47,7 +47,7 @@ CLIENTES
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $cliente->nombre }}</td>
-                                    <td>{{ $cliente->empresa }}</td>
+                                    <td>{{ $cliente->empresa->nombre }}</td>
                                     
                                     <td>
                                         @if ($cliente->estado)

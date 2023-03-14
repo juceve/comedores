@@ -147,10 +147,10 @@ class Controlclientes extends Component
                     }
                     
                     DB::commit();
-                    $this->print($entrega); //LINEA DE IMPRESION SERVIDOR LOCAL
+                    //$this->print($entrega); //LINEA DE IMPRESION SERVIDOR LOCAL
 
                     $datos = $entrega->id . "|" . $entrega->franja->nombre . "|" . $entrega->cliente->nombre . "|" . $entrega->created_at;
-                    redirect('http://localhost/gprinter/public/print/' . $datos); //IMPRESION MEDIANTE LOCALHOST DEL CLIENTE
+                    redirect('http://127.0.0.1/gprinter/public/print/' . $datos); //IMPRESION MEDIANTE LOCALHOST DEL CLIENTE
                     $this->reset(['cedula', 'cliente']);
                     $this->emit('success', 'Entregado correctamente');
                 } catch (\Throwable $th) {

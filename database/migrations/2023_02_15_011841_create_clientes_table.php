@@ -16,8 +16,7 @@ class CreateClientesTable extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',100);
-            $table->string('cargo',100)->nullable();
-            $table->string('empresa',100)->nullable();
+            $table->string('cargo',100)->nullable();            
             $table->foreignId('empresa_id')->nullable()->constrained();
             $table->string('cedula',30)->unique();
             $table->boolean('estado')->default(1);

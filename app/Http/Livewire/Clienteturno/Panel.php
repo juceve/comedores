@@ -29,7 +29,7 @@ class Panel extends Component
         if (!is_null($this->cliente)) {
             if (is_null($clienteTurno)) {
                 $this->nombre = $this->cliente->nombre;
-                $this->nombreempresa = $this->cliente->empresa;
+                $this->nombreempresa = $this->cliente->empresa->nombre;
             } else {
                 $this->emit('error', 'El cliente ya se encuentra agregado.');
                 $this->busqueda = "";
@@ -47,7 +47,7 @@ class Panel extends Component
         if (!is_null($this->cliente)) {
             if (is_null($clienteTurno)) {
                 $this->nombre = $this->cliente->nombre;
-                $this->nombreempresa = $this->cliente->empresa;
+                $this->nombreempresa = $this->cliente->empresa->nombre;
                 $this->emit('cerrarModal');
             } else {
                 $this->emit('error', 'El cliente ya se encuentra agregado.');

@@ -134,7 +134,7 @@
                                     <td>{{++$i}}</td>
                                     <td>{{$cliente->nombre}}</td>
                                     <td>{{$cliente->cedula}}</td>
-                                    <td>{{$cliente->empresa}}</td>
+                                    <td>{{$cliente->empresa->nombre}}</td>
                                     <td>
                                         <button class="btn btn-sm btn-success" title="Seleccionar"
                                             wire:click='seleccionar({{$cliente->id}})'><i
