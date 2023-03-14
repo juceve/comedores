@@ -26,6 +26,11 @@
                     @endif
 
                 </select>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="incluir"
+                        wire:model="incluirTodas">
+                    <label class="form-check-label" for="incluir"><small>Incluir Contratistas</small></label>
+                </div>
             </div>
             @if (count($entregas) >0)
             <div class="col-12 col-md-3 mb-3">
@@ -57,6 +62,7 @@
 
                     <th>FECHA - HORA</th>
                     <th>CLIENTE</th>
+                    <th>EMPRESA</th>
                     <th>PRODUCTO</th>
 
                     {{-- <th></th> --}}
@@ -70,6 +76,7 @@
 
                     <td>{{ $entrega->created_at }}</td>
                     <td>{{ $entrega->cliente }}</td>
+                    <td>{{ $entrega->empresa }}</td>
                     <td>{{ $entrega->franja }}</td>
 
                     {{-- <td style="width: 200px" align="right"> --}}

@@ -18,12 +18,26 @@ class Listado extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $empresas, $fechai, $fechaf, $criterio = "", $selectedEmpresas = array(), $selEmpresas = array();
+    public $incluirTodas = false;
 
     public function mount()
     {
         $this->fechai = date('Y-m-d');
         $this->fechaf = date('Y-m-d');
-        $this->empresas = Empresa::where('reportes', 1)->get();
+        if($this->incluirTodas){
+            $this->empresas = Empresa::where('reportes', 1)->get();
+        }else{
+            $this->empresas = Empresa::where('reportes', 1)->where('reportes',1)->get();
+        }
+        
+    }
+
+    public function updatedIncluirTodas(){
+        if($this->incluirTodas){
+            $this->empresas = Empresa::all();
+        }else{
+            $this->empresas = Empresa::where('reportes', 1)->get();
+        }
     }
 
     public function render()
@@ -53,7 +67,7 @@ class Listado extends Component
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
 
-            ->select('entregas.id', 'entregas.created_at', 'clientes.nombre as cliente', 'franjas.nombre as franja')
+            ->select('entregas.id', 'entregas.created_at', 'clientes.nombre as cliente','empresas.nombre as empresa', 'franjas.nombre as franja')
             ->paginate(5);
         $this->resetPage();
         return view('livewire.entregas.listado', compact('entregas'));

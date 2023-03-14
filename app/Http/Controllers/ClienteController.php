@@ -58,7 +58,12 @@ class ClienteController extends Controller
 
     public function update(Request $request, Cliente $cliente)
     {
-        request()->validate(Cliente::$rules);
+        request()->validate([
+            'nombre' => 'required',
+            'cedula' => 'required',
+            'estado' => 'required',
+            'empresa_id' => 'required',
+          ]);
 
         $cliente->update($request->all());
 
