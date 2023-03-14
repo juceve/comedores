@@ -1,17 +1,20 @@
 <?php
 
-use App\Http\Controllers\CategoriaproductoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ClienteturnoController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\exportExcelController;
 use App\Http\Controllers\FranjaController;
-use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ReservalunchController;
+use App\Http\Controllers\TurnoController;
 use App\Http\Livewire\Aprobaciones\RepDiario;
+use App\Http\Livewire\Clienteturno\Panel;
 use App\Http\Livewire\Entregas\Diario;
 use App\Http\Livewire\Entregas\General;
 use App\Http\Livewire\Entregas\Productosxempresas;
-
+use App\Http\Livewire\Turno\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,3 +45,14 @@ Route::get('excel/entregasdiarias',[exportExcelController::class,'exportEntregas
 
 Route::get('reporte.prodxemp', Productosxempresas::class)->name('productosxempresas');
 Route::get('reporte.general', General::class)->name('general');
+
+Route::resource('turnos',TurnoController::class)->names('turnos');
+Route::get('turnos.config/{id}',Config::class)->name('turnos.config');
+Route::get('clienteturnos',Panel::class)->name('clienteturnos');
+
+Route::resource('reservas',ReservaController::class)->names('reservas');
+Route::post('approved/{id}', [ReservaController::class,'approved'])->name('approved');
+Route::post('approveds', [ReservaController::class,'approvedAll'])->name('approvedAll');
+Route::get('reporte.aprobaciones',RepDiario::class)->name('repdiario');
+
+Route::resource('empresas',EmpresaController::class)->names('empresas');

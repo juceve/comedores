@@ -305,15 +305,20 @@ return [
             'icon' => 'fas fa-fw fa-address-book',
         ],
         [
-            'text' => 'Franjas horarias',
-            'url'  => 'franjas',
-            'icon' => 'fas fa-fw fa-business-time',
-        ],
-        [
             'text' => 'Entregas',
             'url'  => 'entregas',
             'icon' => 'fas fa-fw fa-clipboard-check',
         ],
+        [
+            'text' => 'Clientes por Turno',
+            'url'  => 'clienteturnos',
+            'icon' => 'fas fa-fw fa-user-clock',
+        ],
+        [
+            'text' => 'Reservas',
+            'url'  => 'reservas',
+            'icon' => 'fas fa-fw fa-business-time',
+        ],        
         [
             'text'    => 'REPORTES',
             'icon'    => 'fas fa-fw fa-chart-pie',
@@ -327,6 +332,32 @@ return [
                     'text' => 'Productos por Empresa',
                     'url'  => 'reporte.prodxemp',
                     'icon' => 'fas fa-fw fa-chart-bar',
+                ],
+                [
+                    'text' => 'Aprobaciones Reservas',
+                    'url'  => 'reporte.aprobaciones',
+                    'icon' => 'fas fa-fw fa-chart-bar',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'CONFIGURACIONES',
+            'icon'    => 'fas fa-fw fa-tools',
+            'submenu' => [
+                [
+                    'text' => 'Franjas horarias',
+                    'url'  => 'franjas',
+                    'icon' => 'fas fa-fw fa-business-time',
+                ],
+                [
+                    'text' => 'Turnos',
+                    'url'  => 'turnos',
+                    'icon' => 'fas fa-fw fa-hourglass-end',
+                ],
+                [
+                    'text' => 'Empresas',
+                    'url'  => 'empresas',
+                    'icon' => 'fas fa-fw fa-building',
                 ],
             ],
         ],

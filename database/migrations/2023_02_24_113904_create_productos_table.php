@@ -17,8 +17,8 @@ class CreateProductosTable extends Migration
             $table->id();
             $table->string('nombre',50);
             $table->foreignId('categoriaproducto_id')->constrained();
-            $table->decimal('precioventa',2)->nullable()->default(0);
-            $table->decimal('preciocompra',2)->nullable()->default(0);
+            $table->decimal('precioventa',10,2)->nullable()->default(0);
+            $table->decimal('preciocompra',10,2)->nullable()->default(0);
             $table->timestamps();
         });
     }

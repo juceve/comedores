@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrega;
+use App\Models\Reserva;
 use App\Models\Reservalunch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class ReservalunchController extends Controller
 
     public function index()
     {
-        $reservalunches = Reservalunch::where('estado', 0)
+        $reservalunches = Reserva::where('estado', 0)
             ->where('fecha', date('Y-m-d'))
             ->get();
 
@@ -59,7 +60,7 @@ class ReservalunchController extends Controller
 
     public function approvedAll()
     {
-        $reservalunches = Reservalunch::where('fecha', date('Y-m-d'))
+        $reservalunches = Reserva::where('fecha', date('Y-m-d'))
         ->where('estado', 0)
         ->get();
         if ($reservalunches->count() > 0) {

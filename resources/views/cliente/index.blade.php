@@ -34,6 +34,7 @@ CLIENTES
                                     <th>No</th>
                                     <th>Nombre</th>                                    
                                     <th>Empresa</th>                                    
+                                    
                                     <th>Estado</th>
                                     <th></th>
                                 </tr>
@@ -46,7 +47,8 @@ CLIENTES
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $cliente->nombre }}</td>
-                                    <td>{{ $cliente->empresa->nombre }}</td>
+                                    <td>{{ $cliente->empresa }}</td>
+                                    
                                     <td>
                                         @if ($cliente->estado)
                                         <span style="width: 60px;" class="badge rounded-pill bg-success">Activo</span>

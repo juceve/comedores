@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Create Empresa
+@section('title')
+NUEVA EMPRESA
 @endsection
 
 @section('content')
@@ -11,9 +11,20 @@
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
+                <div class="card card-primary mt-3">
                     <div class="card-header">
-                        <span class="card-title">Create Empresa</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                            <span id="card_title">
+                                NUEVA EMPRESA
+                            </span>
+
+                             <div class="float-right">
+                                <a href="{{ route('empresas.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  <i class="fas fa-arrow-left"></i> {{ __('Volver') }}
+                                </a>
+                              </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('empresas.store') }}"  role="form" enctype="multipart/form-data">

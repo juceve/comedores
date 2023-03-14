@@ -26,39 +26,9 @@ class Listado extends Component
         $this->empresas = Empresa::where('reportes', 1)->get();
     }
 
-
-    public function updatingCriterio()
-    {
-        $this->resetPage();
-        $this->emit('updateSelect2');
-    }
-    public function updatingSelectedEmpresas()
-    {
-        $this->resetPage();
-        $this->emit('updateSelect2');
-    }
-
-    public function updatingFechai()
-    {
-        $this->resetPage();
-        $this->emit('updateSelect2');
-    }
-
-    public function updatingSelEmpresas()
-    {
-        $this->resetPage();
-        $this->emit('updateSelect2');
-    }
-
-    public function updatingFechaf()
-    {
-        $this->resetPage();
-        $this->emit('updateSelect2');
-    }
-
     public function render()
     {
-
+        $this->emit('updateSelect2');
         if (count($this->selectedEmpresas) == 0) {
 
             foreach ($this->empresas as $empresa) {
@@ -85,7 +55,7 @@ class Listado extends Component
 
             ->select('entregas.id', 'entregas.created_at', 'clientes.nombre as cliente', 'franjas.nombre as franja')
             ->paginate(5);
-
+        $this->resetPage();
         return view('livewire.entregas.listado', compact('entregas'));
     }
 

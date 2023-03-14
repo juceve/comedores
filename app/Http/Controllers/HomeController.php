@@ -46,7 +46,7 @@ class HomeController extends Controller
         ->join('empresas','empresas.id','=','clientes.empresa_id')      
         ->whereMonth('entregas.fecha', date('m'))        
         ->select(DB::raw('count(entregas.id) cantidad, empresas.nombre empresa'))
-        ->groupBy('empresa')
+        ->groupBy('empresas.nombre')
         ->get();
         $empresa="";
         $cantidad="";

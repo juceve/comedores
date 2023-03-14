@@ -14,7 +14,7 @@ class CreateFranjasTable extends Migration
             $table->string('nombre',30);
             $table->string('horainicio');
             $table->string('horafinal');
-            $table->decimal('precio',2)->nullable();
+            $table->decimal('precio',10,2)->nullable();
             $table->timestamps();
         });
     }

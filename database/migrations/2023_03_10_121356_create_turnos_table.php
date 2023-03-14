@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReservalunchesTable extends Migration
+class CreateTurnosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateReservalunchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservalunches', function (Blueprint $table) {
+        Schema::create('turnos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cliente_id')->constrained();
-            $table->date('fecha');
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->boolean('estado')->default(0);
+            $table->string('nombre',50);
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateReservalunchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservalunches');
+        Schema::dropIfExists('turnos');
     }
 }

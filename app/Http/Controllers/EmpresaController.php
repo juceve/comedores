@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class EmpresaController
@@ -18,10 +19,9 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::paginate();
+        $empresas = Empresa::all();
 
-        return view('empresa.index', compact('empresas'))
-            ->with('i', (request()->input('page', 1) - 1) * $empresas->perPage());
+        return view('empresa.index', compact('empresas'));
     }
 
     /**
@@ -73,7 +73,6 @@ class EmpresaController extends Controller
     public function edit($id)
     {
         $empresa = Empresa::find($id);
-
         return view('empresa.edit', compact('empresa'));
     }
 
@@ -101,9 +100,16 @@ class EmpresaController extends Controller
      */
     public function destroy($id)
     {
-        $empresa = Empresa::find($id)->delete();
-
-        return redirect()->route('empresas.index')
-            ->with('success', 'Empresa deleted successfully');
+        try {
+            DB::beginTransaction();
+            $empresa = Empresa::find($id)->delete();
+            DB::commit();
+            return redirect()->route('empresas.index')
+                ->with('success', 'Empresa eliminada correctamente');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->route('empresas.index')
+                ->with('error', 'No se pudo completar la operación');
+        }
     }
 }
