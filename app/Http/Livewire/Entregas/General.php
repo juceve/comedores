@@ -2,21 +2,27 @@
 
 namespace App\Http\Livewire\Entregas;
 
+use App\Exports\GeneralExport;
+use App\Exports\prodxempExport;
 use App\Models\Empresa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class General extends Component
 {
     public $fechai, $fechaf, $empresas;
     public $selectedEmpresas = array(), $contenedor = null;
+    public $incluirTodas = false;
 
     public function mount()
     {
         $this->fechai = date('Y-m-d');
         $this->fechaf = date('Y-m-d');
-        $this->empresas = Empresa::all();
+        $this->reset(['empresas']);
+
+        $this->empresas = Empresa::where('reportes', 1)->get();
     }
 
     public function updatedSelectedEmpresas()
@@ -27,6 +33,15 @@ class General extends Component
     public function updatedFechai()
     {
         $this->emit('updateSelect2');
+    }
+    public function updatedIncluirTodas()
+    {
+        $this->emit('updateSelect2');
+        if ($this->incluirTodas) {
+            $this->empresas = Empresa::all();
+        } else {
+            $this->empresas = Empresa::where('reportes', 1)->get();
+        }
     }
 
     public function updatedFechaf()
@@ -48,20 +63,20 @@ class General extends Component
 
         $empresas = implode(",", $selected);
 
-        $sql = "select em.nombre empresa , f.nombre franja, count(*) cantidad, sum(f.precio) subtotal  from entregas e
+        $sql = "select em.nombre empresa , c.nombre cliente,f.nombre franja, count(*) cantidad, sum(f.precio) subtotal
+        FROM entregas e
         INNER JOIN clientes c ON e.cliente_id = c.id
         INNER JOIN empresas em on em.id = c.empresa_id
         INNER JOIN franjas f ON f.id = e.franja_id
         WHERE fecha BETWEEN '$this->fechai' AND '$this->fechaf'
         AND em.id in ($empresas)
-        GROUP BY f.nombre, em.nombre
-        ORDER BY em.nombre, f.id";
+        GROUP BY c.nombre,f.nombre, em.nombre
+        ORDER BY em.id, c.id,f.id";
 
         $entregas = DB::select($sql);
-        
+        $contenedor = [];
+        $this->reset(['contenedor']);
         if (count($entregas)) {
-            $contenedor = [];
-
             $empresa = "";
             $data = null;
             $totalCantidad = 0;
@@ -76,11 +91,11 @@ class General extends Component
                     $b++;
                     $empresa = $item->empresa;
                     $data = null;
-                    $data[] = array($item->franja, $item->cantidad, $item->subtotal);
+                    $data[] = array($item->cliente, $item->franja, $item->cantidad, $item->subtotal);
                     $totalCantidad = 0;
                     $totalImporte = 0;
                 } else {
-                    $data[] = array($item->franja, $item->cantidad, $item->subtotal);
+                    $data[] = array($item->cliente,$item->franja, $item->cantidad, $item->subtotal);
                 }
                 $totalCantidad = $totalCantidad + $item->cantidad;
                 $totalImporte = $totalImporte + $item->subtotal;
@@ -95,10 +110,15 @@ class General extends Component
     public function pdf()
     {
         $this->emit('updateSelect2');
-        $pdf = Pdf::loadView('entrega.reportes.prodxemp', ['contenedor' => $this->contenedor, 'fechai' => $this->fechai, 'fechaf' => $this->fechaf])->output();
+        $pdf = Pdf::loadView('entrega.reportes.general', ['contenedor' => $this->contenedor, 'fechai' => $this->fechai, 'fechaf' => $this->fechaf])->output();
         return response()->streamDownload(
             fn () => print($pdf),
-            "Reporte_ProdXEmp_" . date('Y-m-d') . date('_His') . ".pdf"
+            "Reporte_General_" . date('Y-m-d') . date('_His') . ".pdf"
         );
+    }
+
+    public function excel(){
+        $this->emit('updateSelect2');
+        return Excel::download(new GeneralExport($this->contenedor,$this->fechai, $this->fechaf), 'Rep_General_'.date('His').'.xlsx');
     }
 }

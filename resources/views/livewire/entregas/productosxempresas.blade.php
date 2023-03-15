@@ -96,7 +96,7 @@
                                 <td></td>
                                 <td>{{$data[0]}}</td>
                                 <td align="right">{{$data[1]}}</td>
-                                <td align="right">{{$data[2]}}</td>
+                                <td align="right">{{number_format($data[2], 2, '.', ',');}}</td>
                             </tr>
                             @endforeach
                             @endif

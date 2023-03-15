@@ -38,7 +38,7 @@
 <br>
     <div class="container">
 
-        <table class="table table-bordered" style="width: 100%;">
+        <table class="table table-bordered table-sm" style="width: 100%;">
             <thead>
                 <tr style="background-color: #575757">
                     <td align="center"><b> <font color='#FFF'> EMPRESA</font></b></td>
@@ -56,7 +56,7 @@
                             <tr style="background-color: #f0ecec;">
                                 <td colspan="2"><b> {{$item[0]}}</b></td>
                                 <td align="right"><b> {{$item[1]}}</b></td>
-                                <td align="right"><b> {{number_format($item[3], 2, '.', '');}}</b></td>
+                                <td align="right"><b> {{number_format($item[3], 2, '.', ',');}}</b></td>
                             </tr>
                             @php
                             $totalImporte = $totalImporte + $item[3];
@@ -69,7 +69,7 @@
                                 <td></td>
                                 <td>{{$data[0]}}</td>
                                 <td align="right">{{$data[1]}}</td>
-                                <td align="right">{{$data[2]}}</td>
+                                <td align="right">{{number_format($data[2], 2, '.', ',')}}</td>
                             </tr>
                             @endforeach
                             @endforeach
@@ -83,7 +83,7 @@
                     <td colspan="2"></td>
                     <td align="right" style="background-color: #575757"><font color="#fff" > <b>IMPORTE TOTAL</b></font></td>
                     <td align="right" style="background-color: #575757"><font color="#fff" > <b>{{number_format($totalImporte, 2, '.',
-                            '');}}</b></font>
+                            ',');}}</b></font>
                     </td>
                 </tr>
             </tfoot>

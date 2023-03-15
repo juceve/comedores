@@ -84,4 +84,14 @@ TURNOS
     )
 </script>
 @endif
+
+@if ($message = Session::get('error'))
+<script>
+    Swal.fire(
+        'Error!',
+        '{{$message}}',
+        'error',
+    )
+</script>
+@endif
 @endsection

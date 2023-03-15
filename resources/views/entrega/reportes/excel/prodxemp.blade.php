@@ -47,7 +47,7 @@
             <td></td>
             <td>{{$data[0]}}</td>
             <td align="right">{{$data[1]}}</td>
-            <td align="right">{{$data[2]}}</td>
+            <td align="right">{{number_format($data[2], 2, '.',',');}}</td>
         </tr>
         @endforeach
         @endforeach
@@ -63,8 +63,7 @@
                 <font color="#fff"> <b>IMPORTE TOTAL</b></font>
             </td>
             <td align="right">
-                <b>{{number_format($totalImporte, 2, '.',
-                    ',');}}</b>
+                <b>{{number_format($totalImporte, 2, '.',',');}}</b>
             </td>
         </tr>
     </tfoot>
