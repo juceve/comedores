@@ -11,15 +11,24 @@ use Livewire\Component;
 class Panel extends Component
 {
     public $cliente = null, $empresa = null, $nombre = "", $nombreempresa = "", $selTurno = "";
-    public $busqueda = "", $cnombrecliente ='', $cselTurno ='', $clienteturno = null;
+    public $busqueda = "", $cnombrecliente ='', $cselTurno ='', $clienteturno = null,$clienteturnos = null, $incluirTodas=false;
     protected $listeners = ['seleccionar','remover','selCambioTurno','cambiarTurno'];
+
 
     public function render()
     {
-        $clienteturnos = Clienteturno::all();
+        if($this->incluirTodas){
+            $this->clienteturnos = Clienteturno::all();
+        }else{
+            $this->clienteturnos = Clienteturno::where('turno_id','!=',4)->get();
+        }
+
+        
         $clientes = Cliente::all();
         $turnos = Turno::all();
-        return view('livewire.clienteturno.panel', compact('clienteturnos', 'clientes', 'turnos'))->extends('adminlte::page');
+
+        $this->emit('datatables','');
+        return view('livewire.clienteturno.panel', compact('clientes', 'turnos'))->extends('adminlte::page');
     }
 
     public function buscarCliente()

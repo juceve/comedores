@@ -68,7 +68,7 @@ class TurnoController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             return redirect()->route('turnos.index')
-                ->with('error', 'Ocurrio un error.');
+                ->with('error', 'No se puede eliminar un Turno si tiene clientes asociados.');
         }
     }
 }

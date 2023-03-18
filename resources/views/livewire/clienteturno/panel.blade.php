@@ -14,18 +14,34 @@
 
                     <div class="card-body">
                         <div class="content">
-                            <div class="row col-12 col-md-6 mb-2">
-                                <div class="input-group mb-3">
-                                    <input type="search" class="form-control" placeholder="Buscar por cedula"
-                                        aria-label="Recipient's username" aria-describedby="button-addon2"
-                                        wire:model='busqueda' wire:keydown.enter="buscarCliente">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="button" id="button-addon2"
-                                            data-placement="left" data-toggle="modal" data-target="#modalNuevo"><i
-                                                class="fas fa-search"></i> Avanzada</button>
+                            <div class="row mb-3">
+                                <div class="col-12 col-md-6 ">
+                                    <div class="input-group ">
+                                        <input type="search" class="form-control" placeholder="Buscar por cedula"
+                                            aria-label="Recipient's username" aria-describedby="button-addon2"
+                                            wire:model='busqueda' wire:keydown.enter="buscarCliente">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="button" id="button-addon2"
+                                                data-placement="left" data-toggle="modal" data-target="#modalNuevo"><i
+                                                    class="fas fa-search"></i> Avanzada</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3 ">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="incluir"
+                                            wire:model="incluirTodas" wire:loading.attr="disabled">
+                                        <label class="form-check-label" for="incluir"><small>Incluir
+                                                Turno General</small></label>
+                                        <div wire:loading.delay
+                                            class="z-50 static flex fixed left-0 top-0 bottom-0 w-full bg-gray-400 bg-opacity-50">
+                                            <img src="https://paladins-draft.com/img/circle_loading.gif" width="40"
+                                                height="40" class="m-auto mt-1/4">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
 
                                 <div class="col-12 col-md-3 mb-2">
@@ -54,7 +70,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="table-responsive" wire:ignore>
+                        <div class="table-responsive">
                             <table class="table table-striped table-hover dataTable">
                                 <thead class="thead">
                                     <tr>
@@ -63,7 +79,7 @@
                                         <th>Cliente</th>
                                         <th>Turno</th>
 
-                                        <th style="width: 80px;" ></th>
+                                        <th style="width: 80px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,7 +95,8 @@
 
                                         <td align="right">
                                             <button class="btn btn-warning btn-sm" title="Cambiar turno"
-                                                data-toggle="modal" data-target="#modalCambioTurno" wire:click='selCambioTurno({{$clienteturno->id}})'>
+                                                data-toggle="modal" data-target="#modalCambioTurno"
+                                                wire:click='selCambioTurno({{$clienteturno->id}})'>
                                                 <i class="fas fa-exchange-alt"></i>
                                             </button>
                                             <button class="btn btn-danger btn-sm"
@@ -192,8 +209,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px;">Cerrar</button>
-                    <button type="button" class="btn btn-primary" style="width: 100px;" wire:click='cambiarTurno'>Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        style="width: 100px;">Cerrar</button>
+                    <button type="button" class="btn btn-primary" style="width: 100px;"
+                        wire:click='cambiarTurno'>Guardar</button>
                 </div>
             </div>
         </div>
@@ -209,6 +228,7 @@
 <script>
     $(document).ready(function () {
             $('.dataTable').DataTable({
+                'processing': true,
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                 },
@@ -224,7 +244,17 @@
             $('#modalNuevo').modal('hide');
         });
 
-        
+        Livewire.on('datatables',msg=>{
+            $('.dataTable').DataTable({
+                destroy: true,
+                'processing': true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                pageLength : 5,
+                lengthMenu: [[5, 10, 20], [5, 10, 20]],
+            });
+        });
 </script>
 <script>
     function eliminar(id, nombre){

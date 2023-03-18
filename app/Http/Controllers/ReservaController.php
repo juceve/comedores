@@ -62,7 +62,7 @@ class ReservaController extends Controller
                 $entrega =  Entrega::create([
                     'fecha' => date('Y-m-d'),
                     'cliente_id' => $reservalunch->cliente_id,
-                    'franja_id' => 4,
+                    'franja_id' => $reservalunch->franja_id,
                 ]);
 
                 DB::commit();
@@ -93,7 +93,7 @@ class ReservaController extends Controller
                     $entrega =  Entrega::create([
                         'fecha' => date('Y-m-d'),
                         'cliente_id' => $reservalunch->cliente_id,
-                        'franja_id' => 4,
+                        'franja_id' => $reservalunch->franja_id,
                     ]);
                 }
 

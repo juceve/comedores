@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Clienteturno;
 use App\Models\Empresa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -36,7 +37,11 @@ class ClienteController extends Controller
     {
         request()->validate(Cliente::$rules);
 
-        $cliente = Cliente::create($request->all());        
+        $cliente = Cliente::create($request->all());  
+        
+        $clienteTurno = Clienteturno::create(
+            ["cliente_id" => $cliente->id]
+        );
 
         return redirect()->route('clientes.index')
             ->with('success', 'Cliente created successfully.');
