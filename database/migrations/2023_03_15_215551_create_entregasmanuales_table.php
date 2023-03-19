@@ -15,9 +15,10 @@ class CreateEntregasmanualesTable extends Migration
     {
         Schema::create('entregasmanuales', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('entregas_id')->constrained();
+            $table->foreignId('entrega_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->string('ip')->nullable();
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }

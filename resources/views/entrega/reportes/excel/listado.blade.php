@@ -13,7 +13,7 @@
         <tr>
             <th>Nro</th>
 
-            <th>FECHA - HORA</th>
+            <th>FECHA</th>
             <th>CLIENTE</th>
             <th>PRODUCTO</th>
 
@@ -28,7 +28,7 @@
         <tr>
             <td>{{++$i }}</td>
 
-            <td>{{ $entrega->created_at }}</td>
+            <td>{{ $entrega->fecha }}</td>
             <td>{{ $entrega->cliente }}</td>
             <td>{{ $entrega->franja }}</td>
 

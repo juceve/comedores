@@ -21,8 +21,8 @@
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Entregas Id:</strong>
-                            {{ $entregasmanuale->entregas_id }}
+                            <strong>Entrega Id:</strong>
+                            {{ $entregasmanuale->entrega_id }}
                         </div>
                         <div class="form-group">
                             <strong>User Id:</strong>

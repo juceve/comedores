@@ -18,6 +18,7 @@ class CreateEntregasTable extends Migration
             $table->date('fecha');
             $table->foreignId('cliente_id')->constrained();
             $table->foreignId('franja_id')->constrained();
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }

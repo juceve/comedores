@@ -36,7 +36,7 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Entregas Id</th>
+										<th>Entrega Id</th>
 										<th>User Id</th>
 										<th>Ip</th>
 
@@ -48,7 +48,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $entregasmanuale->entregas_id }}</td>
+											<td>{{ $entregasmanuale->entrega_id }}</td>
 											<td>{{ $entregasmanuale->user_id }}</td>
 											<td>{{ $entregasmanuale->ip }}</td>
 

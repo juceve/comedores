@@ -66,6 +66,7 @@ class Diario extends Component
         $entregas = DB::table('entregas')
             ->rightJoin('franjas', 'franjas.id', '=', 'entregas.franja_id')            
             ->whereBetween('entregas.fecha', [$fechai, $fechaf])
+            ->where('entregas.estado', 1)
             ->where('entregas.franja_id', $franja_id)
             ->select(DB::raw('count(entregas.id) as cant, sum(franjas.precio) as total'))
             ->first();

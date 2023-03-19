@@ -29,22 +29,26 @@ class HomeController extends Controller
         $clientes = Cliente::all();
         $desayunos = Entrega::where('fecha', date('Y-m-d'))
             ->where('franja_id', 1)
+            ->where('estado', 1)
             ->get();
         $almuerzos = Entrega::where('fecha', date('Y-m-d'))
             ->where('franja_id', 2)
+            ->where('estado', 1)
             ->get();
         $cenas = Entrega::where('fecha', date('Y-m-d'))
             ->where('franja_id', 3)
+            ->where('estado', 1)
             ->get();
         $lunch = Entrega::where('fecha', date('Y-m-d'))
             ->where('franja_id', 4)
-            ->orWhere('franja_id', 5)
+            ->where('estado', 1)            
             ->get();
         //////////////////////////////////////////////////////////
         $mensuales = DB::table('entregas')
         ->join('clientes','clientes.id','=','entregas.cliente_id')  
         ->join('empresas','empresas.id','=','clientes.empresa_id')      
-        ->whereMonth('entregas.fecha', date('m'))        
+        ->whereMonth('entregas.fecha', date('m'))  
+        ->where('entregas.estado', 1)      
         ->select(DB::raw('count(entregas.id) cantidad, empresas.nombre empresa'))
         ->groupBy('empresas.nombre')
         ->get();

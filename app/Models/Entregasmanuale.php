@@ -4,26 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Entregasmanuale
- *
- * @property $id
- * @property $entregas_id
- * @property $user_id
- * @property $ip
- * @property $created_at
- * @property $updated_at
- *
- * @property Entrega $entrega
- * @property User $user
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
+
 class Entregasmanuale extends Model
 {
     
     static $rules = [
-		'entregas_id' => 'required',
+		'entrega_id' => 'required',
 		'user_id' => 'required',
     ];
 
@@ -34,7 +20,7 @@ class Entregasmanuale extends Model
      *
      * @var array
      */
-    protected $fillable = ['entregas_id','user_id','ip'];
+    protected $fillable = ['entrega_id','user_id','ip','estado'];
 
 
     /**
@@ -42,7 +28,7 @@ class Entregasmanuale extends Model
      */
     public function entrega()
     {
-        return $this->hasOne('App\Models\Entrega', 'id', 'entregas_id');
+        return $this->hasOne('App\Models\Entrega', 'id', 'entrega_id');
     }
     
     /**

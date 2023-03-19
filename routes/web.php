@@ -4,6 +4,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ClienteturnoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EntregaController;
+use App\Http\Controllers\EntregasmanualeController;
 use App\Http\Controllers\exportExcelController;
 use App\Http\Controllers\FranjaController;
 use App\Http\Controllers\ReservaController;
@@ -13,6 +14,7 @@ use App\Http\Livewire\Aprobaciones\RepDiario;
 use App\Http\Livewire\Clienteturno\Panel;
 use App\Http\Livewire\Entregas\Diario;
 use App\Http\Livewire\Entregas\General;
+use App\Http\Livewire\Entregas\Manuales;
 use App\Http\Livewire\Entregas\Productosxempresas;
 use App\Http\Livewire\Turno\Config;
 use Illuminate\Support\Facades\Auth;
@@ -56,3 +58,4 @@ Route::post('approveds', [ReservaController::class,'approvedAll'])->name('approv
 Route::get('reporte.aprobaciones',RepDiario::class)->name('repdiario');
 
 Route::resource('empresas',EmpresaController::class)->names('empresas');
+Route::get('entregasmanuales',Manuales::class)->name('entregasmanuales');

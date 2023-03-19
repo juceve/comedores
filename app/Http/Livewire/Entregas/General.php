@@ -69,6 +69,7 @@ class General extends Component
         INNER JOIN empresas em on em.id = c.empresa_id
         INNER JOIN franjas f ON f.id = e.franja_id
         WHERE fecha BETWEEN '$this->fechai' AND '$this->fechaf'
+        AND e.estado = 1
         AND em.id in ($empresas)
         GROUP BY c.nombre,f.nombre, em.nombre
         ORDER BY em.id, c.id,f.id";

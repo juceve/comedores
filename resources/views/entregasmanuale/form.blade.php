@@ -2,9 +2,9 @@
     <div class="box-body">
         
         <div class="form-group">
-            {{ Form::label('entregas_id') }}
-            {{ Form::text('entregas_id', $entregasmanuale->entregas_id, ['class' => 'form-control' . ($errors->has('entregas_id') ? ' is-invalid' : ''), 'placeholder' => 'Entregas Id']) }}
-            {!! $errors->first('entregas_id', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('entrega_id') }}
+            {{ Form::text('entrega_id', $entregasmanuale->entrega_id, ['class' => 'form-control' . ($errors->has('entrega_id') ? ' is-invalid' : ''), 'placeholder' => 'Entrega Id']) }}
+            {!! $errors->first('entrega_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('user_id') }}

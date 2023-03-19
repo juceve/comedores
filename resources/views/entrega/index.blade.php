@@ -23,15 +23,8 @@ Entregas
                             </a> --}}
                         </div>
                     </div>
-                </div>
-                @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-                @endif
-
-                <div class="card-body">
-                   
+                </div>                
+                <div class="card-body">                   
                     @livewire('entregas.listado')
                 </div>
             </div>
@@ -41,6 +34,16 @@ Entregas
 </div>
 @endsection
 @section('js')
+@if ($message = Session::get('success'))
+<script>
+    Swal.fire(
+  'Excelente!',
+  '{{ $message }}',
+  'success'
+)
+</script>
+@endif
+
 <script>
     $(document).ready(function() {
         var hoy = new Date();

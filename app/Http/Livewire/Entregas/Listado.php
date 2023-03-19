@@ -20,6 +20,8 @@ class Listado extends Component
     public $empresas, $fechai, $fechaf, $criterio = "", $selectedEmpresas = array(), $selEmpresas = array();
     public $incluirTodas = false;
 
+    protected $listeners = ['anular'];
+
     public function mount()
     {
         $this->fechai = date('Y-m-d');
@@ -42,7 +44,7 @@ class Listado extends Component
 
     public function render()
     {
-        $this->emit('updateSelect2');
+        
         if (count($this->selectedEmpresas) == 0) {
 
             foreach ($this->empresas as $empresa) {
@@ -58,18 +60,21 @@ class Listado extends Component
             ->join('franjas', 'franjas.id', '=', 'entregas.franja_id')
             ->where(function ($query) {
                 $query->whereBetween('entregas.fecha', [$this->fechai, $this->fechaf])
+                    ->where('entregas.estado', 1)
                     ->where('clientes.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
             ->orWhere(function ($query) {
                 $query->whereBetween('entregas.fecha', [$this->fechai, $this->fechaf])
+                    ->where('entregas.estado', 1)
                     ->where('franjas.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
 
-            ->select('entregas.id', 'entregas.created_at', 'clientes.nombre as cliente','empresas.nombre as empresa', 'franjas.nombre as franja')
+            ->select('entregas.id', 'entregas.fecha', 'entregas.created_at', 'clientes.nombre as cliente','empresas.nombre as empresa', 'franjas.nombre as franja')
             ->paginate(5);
         $this->resetPage();
+        $this->emit('updateSelect2');
         return view('livewire.entregas.listado', compact('entregas'));
     }
 
@@ -92,16 +97,18 @@ class Listado extends Component
             ->join('franjas', 'franjas.id', '=', 'entregas.franja_id')
             ->where(function ($query) {
                 $query->whereBetween('entregas.fecha', [$this->fechai, $this->fechaf])
+                    ->where('entregas.estado', 1)
                     ->where('clientes.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
             ->orWhere(function ($query) {
                 $query->whereBetween('entregas.fecha', [$this->fechai, $this->fechaf])
+                    ->where('entregas.estado', 1)
                     ->where('franjas.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
 
-            ->select('entregas.id', 'entregas.created_at', 'clientes.nombre as cliente', 'franjas.nombre as franja')
+            ->select('entregas.id', 'entregas.fecha','entregas.created_at', 'clientes.nombre as cliente', 'franjas.nombre as franja')
             ->get();
 
         $pdf = Pdf::loadView('entrega.reportes.listado', ['entregas' => $entregas, 'fechai' => $this->fechai, 'fechaf' => $this->fechaf])->output();
@@ -131,18 +138,36 @@ class Listado extends Component
             ->join('franjas', 'franjas.id', '=', 'entregas.franja_id')
             ->where(function ($query) {
                 $query->whereBetween('entregas.fecha', [$this->fechai, $this->fechaf])
+                    ->where('entregas.estado', 1)
                     ->where('clientes.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
             ->orWhere(function ($query) {
                 $query->whereBetween('entregas.fecha', [$this->fechai, $this->fechaf])
+                    ->where('entregas.estado', 1)
                     ->where('franjas.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
 
-            ->select('entregas.id', 'entregas.created_at', 'clientes.nombre as cliente', 'franjas.nombre as franja')
+            ->select('entregas.id', 'entregas.fecha','entregas.created_at', 'clientes.nombre as cliente', 'franjas.nombre as franja')
             ->get();
 
         return Excel::download(new ListadoEntregaExport($entregas, $this->fechai, $this->fechaf), 'Rep_ListadoEntregas_' . date('His') . '.xlsx');
+    }
+    public function anular($id){
+        $this->emit('updateSelect2');
+        DB::beginTransaction();
+        try {
+            $entrega = Entrega::find($id);
+            $entrega->estado = false;
+            $entrega->save();
+
+            DB::commit();
+            return redirect()->route('entregas.index')
+            ->with('success', 'Entrega anulada correctamente');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            $this->emit('error','Ha ocurrido un error, no afecto a ningun registro.');            
+        }
     }
 }

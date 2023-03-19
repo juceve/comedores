@@ -38,7 +38,7 @@
 
                 <div class="row">
                     <div class="col-6">
-                        <button class="btn btn-danger btn-block" wire:click='pdf'><i class="fas fa-file-pdf"></i>
+                        <button class="btn btn-danger btn-block" wire:click='pdf' wire:loading.attr='disabled'><i class="fas fa-file-pdf"></i>
                             PDF</button>
                     </div>
                     <div class="col-6">
@@ -60,7 +60,7 @@
                 <tr>
                     <th>ID</th>
 
-                    <th>FECHA - HORA</th>
+                    <th>FECHA</th>
                     <th>CLIENTE</th>
                     <th>EMPRESA</th>
                     <th>PRODUCTO</th>
@@ -74,11 +74,14 @@
                 <tr>
                     <td>{{$entrega->id }}</td>
 
-                    <td>{{ $entrega->created_at }}</td>
+                    <td>{{ $entrega->fecha }}</td>
                     <td>{{ $entrega->cliente }}</td>
                     <td>{{ $entrega->empresa }}</td>
                     <td>{{ $entrega->franja }}</td>
-
+                    <td>
+                        <button type="submit" class="btn btn-warning btn-sm" title="Anular" onclick="anular({{$entrega->id}})"><i class="fa fa-fw fa-trash"
+                            ></i></button>
+                    </td>
                     {{-- <td style="width: 200px" align="right"> --}}
                         {{-- <form action="{{ route('entregas.destroy',$entrega->id) }}" method="POST">
                             <a class="btn btn-sm btn-primary " href="{{ route('entregas.show',$entrega->id) }}"
@@ -115,6 +118,27 @@
 
 Livewire.on('updateSelect2',()=>{
     $('.select2').select2();
+});
+
+Livewire.on('error',msg=>{
+    Swal.fire('Error!', msg,'error');
 })
+
+function anular(id){
+    Swal.fire({
+            title: 'Anular Entrega',
+            text: "Está seguro de anular el registro?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, anular',
+            cancelButtonText: 'No, cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emit('anular',id);
+            }
+            });
+}
 </script>
 @endsection

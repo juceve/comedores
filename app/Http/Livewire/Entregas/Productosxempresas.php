@@ -67,6 +67,7 @@ class Productosxempresas extends Component
         INNER JOIN empresas em on em.id = c.empresa_id
         INNER JOIN franjas f ON f.id = e.franja_id
         WHERE fecha BETWEEN '$this->fechai' AND '$this->fechaf'
+        AND e.estado = 1
         AND em.id in ($empresas)
         GROUP BY f.nombre, em.nombre
         ORDER BY em.nombre, f.id";

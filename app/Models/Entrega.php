@@ -4,21 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Entrega
- *
- * @property $id
- * @property $fecha
- * @property $cliente_id
- * @property $franja_id
- * @property $created_at
- * @property $updated_at
- *
- * @property Cliente $cliente
- * @property Franja $franja
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Entrega extends Model
 {
     
@@ -35,7 +20,7 @@ class Entrega extends Model
      *
      * @var array
      */
-    protected $fillable = ['fecha','cliente_id','franja_id'];
+    protected $fillable = ['fecha','cliente_id','franja_id','estado','created_at'];
 
 
     /**

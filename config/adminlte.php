@@ -318,25 +318,35 @@ return [
             'text' => 'Reservas',
             'url'  => 'reservas',
             'icon' => 'fas fa-fw fa-business-time',
-        ],        
+        ],  
+        [
+            'text' => 'Entregas Manuales',
+            'url'  => 'entregasmanuales',
+            'icon' => 'fas fa-fw fa-calendar-plus',
+        ],         
         [
             'text'    => 'REPORTES',
             'icon'    => 'fas fa-fw fa-chart-pie',
             'submenu' => [
                 [
+                    'text' => 'Entregas General',
+                    'url'  => 'reporte.general',
+                    'icon' => 'fas fa-fw fa-file-alt',
+                ],
+                [
                     'text' => 'Entregas Diarias',
                     'url'  => 'reporte.diario',
-                    'icon' => 'fas fa-fw fa-chart-bar',
+                    'icon' => 'fas fa-fw fa-file-alt',
                 ],
                 [
                     'text' => 'Productos por Empresa',
                     'url'  => 'reporte.prodxemp',
-                    'icon' => 'fas fa-fw fa-chart-bar',
-                ],
+                    'icon' => 'fas fa-fw fa-file-alt',
+                ],                
                 [
                     'text' => 'Aprobaciones Reservas',
                     'url'  => 'reporte.aprobaciones',
-                    'icon' => 'fas fa-fw fa-chart-bar',
+                    'icon' => 'fas fa-fw fa-file-alt',
                 ],
             ],
         ],
