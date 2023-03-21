@@ -70,7 +70,7 @@ class Listado extends Component
                     ->where('franjas.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
-
+            ->orderBy('entregas.id','DESC')
             ->select('entregas.id', 'entregas.fecha', 'entregas.created_at', 'clientes.nombre as cliente','empresas.nombre as empresa', 'franjas.nombre as franja')
             ->paginate(5);
         $this->resetPage();
@@ -107,7 +107,7 @@ class Listado extends Component
                     ->where('franjas.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
-
+            ->orderBy('entregas.id')
             ->select('entregas.id', 'entregas.fecha','entregas.created_at', 'clientes.nombre as cliente', 'franjas.nombre as franja')
             ->get();
 
@@ -148,7 +148,7 @@ class Listado extends Component
                     ->where('franjas.nombre', 'LIKE', "%$this->criterio%")
                     ->whereIn('clientes.empresa_id', $this->selEmpresas);
             })
-
+            ->orderBy('entregas.id')
             ->select('entregas.id', 'entregas.fecha','entregas.created_at', 'clientes.nombre as cliente', 'franjas.nombre as franja')
             ->get();
 

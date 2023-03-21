@@ -319,11 +319,11 @@ return [
             'url'  => 'reservas',
             'icon' => 'fas fa-fw fa-business-time',
         ],  
-        [
-            'text' => 'Entregas Manuales',
-            'url'  => 'entregasmanuales',
-            'icon' => 'fas fa-fw fa-calendar-plus',
-        ],         
+        // [
+        //     'text' => 'Entregas Manuales',
+        //     'url'  => 'entregasmanuales',
+        //     'icon' => 'fas fa-fw fa-calendar-plus',
+        // ],         
         [
             'text'    => 'REPORTES',
             'icon'    => 'fas fa-fw fa-chart-pie',

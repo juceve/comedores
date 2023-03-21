@@ -1,4 +1,10 @@
 <table class="table table-bordered table-sm fuentesm" style="width: 100%">
+    <tr>
+        <td colspan="5" align="center">REPORTE GENERAL DE ENTREGAS</td>        
+    </tr>
+    <tr>
+        <td colspan="5" align="center">Del {{$fechai}} al {{$fechaf}}</td>
+    </tr>
     <thead>
         <tr class="text-center" style="background-color: rgb(117, 117, 117);">
             <td><strong><font color="white"> EMPRESA</font></strong></td>
