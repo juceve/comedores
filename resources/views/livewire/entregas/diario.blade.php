@@ -63,18 +63,21 @@
                         $i=0;
                         $total = 0;
                         @endphp
-                        @foreach ($contenedor as $entrega)
-                        <tr>
-                            <td align="center">{{++$i}}</td>
-                            <td>{{$entrega['nombre']}}</td>
-                            <td align="right">{{$entrega['precio']}}</td>
-                            <td align="center">{{$entrega['cantidad']}}</td>
-                            <td align="right">{{$entrega['total']}}</td>
-                        </tr>
-                        @php
-                        $total = $total + $entrega['total'];
-                        @endphp
-                        @endforeach
+                        @if (!is_null($contenedor))
+                            @foreach ($contenedor as $entrega)
+                                <tr>
+                                    <td align="center">{{++$i}}</td>
+                                    <td>{{$entrega['nombre']}}</td>
+                                    <td align="right">{{$entrega['precio']}}</td>
+                                    <td align="center">{{$entrega['cantidad']}}</td>
+                                    <td align="right">{{number_format($entrega['total'], 2, '.', ',')}}</td>
+                                </tr>
+                                @php
+                                $total = $total + $entrega['total'];
+                                @endphp
+                            @endforeach
+                        @endif
+                        
                     </tbody>
                     <tfoot>
                         <tr>

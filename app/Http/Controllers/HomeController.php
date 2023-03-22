@@ -27,43 +27,62 @@ class HomeController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
-        $desayunos = Entrega::where('fecha', date('Y-m-d'))
-            ->where('franja_id', 1)
-            ->where('estado', 1)
-            ->get();
-        $almuerzos = Entrega::where('fecha', date('Y-m-d'))
-            ->where('franja_id', 2)
-            ->where('estado', 1)
-            ->get();
-        $cenas = Entrega::where('fecha', date('Y-m-d'))
-            ->where('franja_id', 3)
-            ->where('estado', 1)
-            ->get();
-        $lunch = Entrega::where('fecha', date('Y-m-d'))
-            ->where('franja_id', 4)
-            ->where('estado', 1)            
-            ->get();
-        //////////////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $hoy =date('Y-m-d');
+        $sql = "SELECT f.nombre nombre, COUNT(*) cantidad, SUM(f.precio) total FROM entregas e
+       INNER JOIN franjas f on e.franja_id = f.id
+       WHERE fecha = '$hoy' 
+       AND e.franja_id = 1
+       AND e.estado = 1
+       GROUP BY f.nombre";
+        $desayunos =  DB::select($sql);
+
+        $sql = "SELECT f.nombre nombre, COUNT(*) cantidad, SUM(f.precio) total FROM entregas e
+       INNER JOIN franjas f on e.franja_id = f.id
+       WHERE fecha = '$hoy' 
+       AND e.franja_id = 2
+       AND e.estado = 1
+       GROUP BY f.nombre";
+        $almuerzos =  DB::select($sql);
+
+        $sql = "SELECT f.nombre nombre, COUNT(*) cantidad, SUM(f.precio) total FROM entregas e
+       INNER JOIN franjas f on e.franja_id = f.id
+       WHERE fecha = '$hoy' 
+       AND e.franja_id = 3
+       AND e.estado = 1
+       GROUP BY f.nombre";
+        $cenas =  DB::select($sql);
+
+        $sql = "SELECT f.nombre nombre, COUNT(*) cantidad, SUM(f.precio) total FROM entregas e
+       INNER JOIN franjas f on e.franja_id = f.id
+       WHERE fecha = '$hoy' 
+       AND e.franja_id = 4
+       AND e.estado = 1
+       GROUP BY f.nombre";
+        $lunchs =  DB::select($sql);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
         $mensuales = DB::table('entregas')
-        ->join('clientes','clientes.id','=','entregas.cliente_id')  
-        ->join('empresas','empresas.id','=','clientes.empresa_id')      
-        ->whereMonth('entregas.fecha', date('m'))  
-        ->where('entregas.estado', 1)      
-        ->select(DB::raw('count(entregas.id) cantidad, empresas.nombre empresa'))
-        ->groupBy('empresas.nombre')
-        ->get();
-        $empresa="";
-        $cantidad="";
+            ->join('clientes', 'clientes.id', '=', 'entregas.cliente_id')
+            ->join('empresas', 'empresas.id', '=', 'clientes.empresa_id')
+            ->whereMonth('entregas.fecha', date('m'))
+            ->where('entregas.estado', 1)
+            ->select(DB::raw('count(entregas.id) cantidad, empresas.nombre empresa'))
+            ->groupBy('empresas.nombre')
+            ->get();
+        $empresa = "";
+        $cantidad = "";
         foreach ($mensuales as $item) {
-            if($empresa==""){
+            if ($empresa == "") {
                 $empresa = $item->empresa;
                 $cantidad = $item->cantidad;
-            }else{
-                $empresa = $empresa."|".$item->empresa;
-                $cantidad = $cantidad."|".$item->cantidad;
-            }            
+            } else {
+                $empresa = $empresa . "|" . $item->empresa;
+                $cantidad = $cantidad . "|" . $item->cantidad;
+            }
         }
-        
-        return view('home', compact('clientes', 'desayunos','almuerzos','cenas','lunch','empresa','cantidad'));
+
+        return view('home', compact('clientes', 'desayunos', 'almuerzos', 'cenas', 'lunchs', 'empresa', 'cantidad'));
     }
 }

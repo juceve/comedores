@@ -7,7 +7,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('ENTREGAS MANUALES') }}
+                                REGISTRO DE ENTREGA MANUAL
                             </span>
                         </div>
                     </div>
@@ -26,17 +26,22 @@
                                                     class="fas fa-search"></i> Avanzada</button>
                                         </div>
                                     </div>
-                                </div>                                
+                                </div>
                             </div>
 
                             <div class="row">
 
-                                <div class="col-12 col-md-3 mb-2">
+                                <div class="col-12 mb-2">
                                     <input class="form-control" type="text" placeholder="Nombre Cliente" readonly
                                         wire:model='nombre'>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-12 col-md-3 mb-2">
                                     <input type="date" class="form-control" wire:model='fechaEntrega'>
+                                </div>
+                                <div class="col-12 col-md-3 mb-2">
+                                    <input type="time" class="form-control" wire:model='horaEntrega'>
                                 </div>
                                 <div class="col-12 col-md-3 mb-2">
                                     <select class="form-control" wire:model='selFranja'>
@@ -54,15 +59,62 @@
                                             class="fas fa-save"></i> Registrar Entrega</button>
                                 </div>
                             </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="card card-secondary">
+                    <div class="card-header text-center">
+                        LISTADO DE ENTREGAS MANUALES
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-3 mb-3">
+                                <label for="">Fecha Inicio</label>
+                                <input type="date" class="form-control " value="{{date('Y-m-d')}}" wire:model="fechai">
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <label for="">Fecha Fin</label>
+                                <input type="date" class="form-control " value="{{date('Y-m-d')}}" wire:model="fechaf">
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <label for="">Franjas</label>
+                                <select class="form-control" style="width: 100%" wire:model='selFranja'>
+                                    <option value="">Todos</option>
+                                    @foreach ($franjas as $franja)
+                                    <option value="{{$franja->id}}">{{$franja->nombre}}</option>
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+                            @if (count($entregasmanuales) > 0)
+                            <div class="col-12 col-md-3 mb-3">
+                                <label for="">Exportar</label>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-danger btn-block" wire:click='pdf'><i
+                                                class="fas fa-file-pdf"></i>
+                                            PDF</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-success btn-block" wire:click='excel'><i
+                                                class="fas fa-file-excel"></i>
+                                            Excel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            @endif
+
+
                         </div>
-                        <hr>
-                        <div class="table-responsive" wire:ignore>
+                        <div class="table-responsive">
                             <table class="table table-striped table-hover dataTable">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        <th>Registro</th>
-                                        <th>Entrega</th>
+                                        <th>Registro Manual</th>
+                                        <th>Entrega Producto</th>
                                         <th>Cliente</th>
                                         <th>Empresa</th>
                                         <th>Producto</th>
@@ -77,13 +129,12 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $entregam->created_at }}</td>
-                                        <td>{{ $entregam->fechaentrega }}</td>
+                                        <td>{{ $entregam->fechoraentrega }}</td>
                                         <td>{{ $entregam->cliente }}</td>
                                         <td>{{ $entregam->empresa }}</td>
                                         <td>{{ $entregam->franja }}</td>
                                         <td align="right">
-                                            <button class="btn btn-warning btn-sm"
-                                                onclick="eliminar({{$entregam->id}})"
+                                            <button class="btn btn-warning btn-sm" onclick="eliminar({{$entregam->id}})"
                                                 title="Anular">
                                                 <i class="fa fa-fw fa-trash"></i>
 
@@ -96,7 +147,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -155,52 +205,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal -->
-    {{-- <div class="modal fade" id="modalCambioTurno" tabindex="-1" aria-labelledby="modalCambioTurnoLabel"
-        aria-hidden="true" wire:ignore>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCambioTurnoLabel">Cambiar Turno de Cliente</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 col-md-6 mb-2">
-                            <label for="">Cliente</label>
-                        </div>
-                        <div class="col-12 col-md-6 mb-2">
-                            <input type="text" class="form-control" readonly wire:model='cnombrecliente'>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="">Turno</label>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <select class="form-control" wire:model='cselTurno'>
-                                <option value="">Seleccione un turno</option>
-                                @if (!is_null($franjas))
-                                @foreach ($franjas as $franja)
-                                <option value="{{$franja->id}}">{{$franja->nombre}}</option>
-                                @endforeach
-                                @endif
-
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        style="width: 100px;">Cerrar</button>
-                    <button type="button" class="btn btn-primary" style="width: 100px;"
-                        wire:click='cambiarTurno'>Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
 </div>
 @section('js')
 @if ($message = Session::get('success'))
@@ -212,16 +216,20 @@
     $(document).ready(function () {
             $('.dataTable').DataTable({
                 'processing': true,
-                dom: 'Bfrtip',
-                buttons: [
-                   'excel'
-                ],
+                'searching' : false,
+                "lengthChange": false,
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                 },
                 pageLength : 5,
                 lengthMenu: [[5, 10, 20], [5, 10, 20]],
             });
+
+            $('.select2').select2();
+        $('.select2').on('change', function (e) {
+            let data = $(this).val();
+                @this.set('selectedFranjas', data);
+        });
         });
         Livewire.on('error', msg =>{
             Swal.fire('Atención',msg,'error');
@@ -235,10 +243,8 @@
             $('.dataTable').DataTable({
                 destroy: true,
                 'processing': true,
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel'
-                ],
+                'searching' : false,
+                "lengthChange": false,
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                 },
@@ -264,5 +270,9 @@
             }
             });
     }
+
+    Livewire.on('updateSelect2',()=>{
+        $('.select2').select2();
+    })
 </script>
 @endsection

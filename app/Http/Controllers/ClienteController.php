@@ -40,7 +40,8 @@ class ClienteController extends Controller
         $cliente = Cliente::create($request->all());  
         
         $clienteTurno = Clienteturno::create(
-            ["cliente_id" => $cliente->id]
+            ["cliente_id" => $cliente->id,
+            "turno_id" => 4]
         );
 
         return redirect()->route('clientes.index')

@@ -9,14 +9,29 @@
     <hr>
 
     <h4 class="text-secondary">Entregas de Hoy</h4>
+
     <div class="row mt-3">
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{$desayunos->count()}}</h3>
+                    @php
+                    $desayuno=null;
+                    foreach ($desayunos as $item) {
+                    $desayuno = $item;
+                    }
+                    @endphp
+                    <h4>Desayunos</h4>
+                    <p>
+                        @if (!is_null($desayuno))
+                        <strong>Cantidad:</strong> {{$desayuno->cantidad}} <br>
+                        <strong>Importe Bs:</strong> {{number_format($desayuno->total, 2, '.', ',')}}
+                        @else
+                        <strong>Cantidad:</strong> 0 <br>
+                        <strong>Importe Bs:</strong> 0
+                    @endif
 
-                    <p>Desayunos</p>
+                    </p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-coffee"></i>
@@ -25,13 +40,28 @@
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-6 ">
+        
+        <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{$almuerzos->count()}}</h3>
+                    @php
+                    $almuerzo=null;
+                    foreach ($almuerzos as $item) {
+                    $almuerzo = $item;
+                    }
+                    @endphp
+                    <h4>Almuerzos</h4>
+                    <p>
+                        @if (!is_null($almuerzo))
+                        <strong>Cantidad:</strong> {{$almuerzo->cantidad}} <br>
+                        <strong>Importe Bs:</strong> {{number_format($almuerzo->total, 2, '.', ',')}}
+                        @else
+                        <strong>Cantidad:</strong> 0 <br>
+                        <strong>Importe Bs:</strong> 0
+                    @endif
 
-                    <p>Almuerzos</p>
+                    </p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-pizza-slice"></i>
@@ -40,14 +70,28 @@
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <!-- ./col -->
+
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>{{$cenas->count()}}</h3>
+                    @php
+                    $cena=null;
+                    foreach ($cenas as $item) {
+                    $cena = $item;
+                    }
+                    @endphp
+                    <h4>Cenas</h4>
+                    <p>
+                        @if (!is_null($cena))
+                        <strong>Cantidad:</strong> {{$cena->cantidad}} <br>
+                        <strong>Importe Bs:</strong> {{number_format($cena->total, 2, '.', ',')}}
+                        @else
+                        <strong>Cantidad:</strong> 0 <br>
+                        <strong>Importe Bs:</strong> 0
+                    @endif
 
-                    <p>Cenas</p>
+                    </p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-hamburger"></i>
@@ -56,13 +100,28 @@
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
+
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{$lunch->count()}}</h3>
+                    @php
+                    $lunch=null;
+                    foreach ($lunchs as $item) {
+                    $lunch = $item;
+                    }
+                    @endphp
+                    <h4>Lunch's</h4>
+                    <p>
+                        @if (!is_null($lunch))
+                        <strong>Cantidad:</strong> {{$lunch->cantidad}} <br>
+                        <strong>Importe Bs:</strong> {{number_format($lunch->total, 2, '.', ',')}}
+                        @else
+                        <strong>Cantidad:</strong> 0 <br>
+                        <strong>Importe Bs:</strong> 0
+                    @endif
 
-                    <p>Lunch's</p>
+                    </p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-cookie"></i>
@@ -71,7 +130,7 @@
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
+        
     </div>
     <hr>
 

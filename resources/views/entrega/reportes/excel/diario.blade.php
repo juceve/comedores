@@ -25,7 +25,7 @@
             <td>{{$entrega['nombre']}}</td>
             <td>{{$entrega['precio']}}</td>
             <td>{{$entrega['cantidad']}}</td>
-            <td>{{$entrega['total']}}</td>
+            <td>{{number_format($entrega['total'], 2, '.', ',')}}</td>
         </tr>
         @php
         $total = $total + $entrega['total'];
