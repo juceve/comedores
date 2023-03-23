@@ -15,26 +15,25 @@ CLIENTES
                         <span id="card_title">
                             LISTADO DE CLIENTES
                         </span>
-
+                        @can('clientes.create')
                         <div class="float-right">
                             <a href="{{ route('clientes.create') }}" class="btn btn-primary btn-sm float-right"
                                 data-placement="left">
                                 <i class="fas fa-plus"></i> {{ __('Nuevo') }}
                             </a>
                         </div>
+                        @endcan
                     </div>
                 </div>
-
-
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover dataTable">
                             <thead class="thead">
                                 <tr>
                                     <th>No</th>
-                                    <th>Nombre</th>                                    
-                                    <th>Empresa</th>                                    
-                                    
+                                    <th>Nombre</th>
+                                    <th>Empresa</th>
+
                                     <th>Estado</th>
                                     <th></th>
                                 </tr>
@@ -48,7 +47,7 @@ CLIENTES
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $cliente->nombre }}</td>
                                     <td>{{ $cliente->empresa->nombre }}</td>
-                                    
+
                                     <td>
                                         @if ($cliente->estado)
                                         <span style="width: 60px;" class="badge rounded-pill bg-success">Activo</span>
@@ -69,16 +68,20 @@ CLIENTES
                                                 <a class="dropdown-item"
                                                     href="{{ route('clientes.show',$cliente->id) }}"><i
                                                         class="fa fa-fw fa-eye text-gray"></i> Ver info</a>
+                                                @can('clientes.edit')
                                                 <a class="dropdown-item"
-                                                    href="{{ route('clientes.edit',$cliente->id) }}"><i
-                                                        class="fa fa-fw fa-edit text-gray"></i> Editar</a>
+                                                href="{{ route('clientes.edit',$cliente->id) }}"><i
+                                                    class="fa fa-fw fa-edit text-gray"></i> Editar</a>
+                                                @endcan
                                                 <form action="{{ route('clientes.destroy',$cliente->id) }}"
                                                     onsubmit="return false" method="POST" class="actdesc-cliente">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="dropdown-item"><i
+                                                    @can('clientes.destroy')
+                                                        <button type="submit" class="dropdown-item"><i
                                                             class="fas fa-power-off text-gray"></i> Act/Des
                                                         Cliente</button>
+                                                    @endcan                                                    
                                                 </form>
                                             </div>
                                         </div>

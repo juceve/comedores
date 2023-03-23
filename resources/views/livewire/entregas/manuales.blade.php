@@ -1,8 +1,14 @@
 <div>
+    {{-- @if(!auth()->user()->can('entregas.entregasmanuales'))
+    @php
+    return redirect()->route('noautorizado');
+    @endphp
+    @endif --}}
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-sm-12">
-                <div class="card card-primary mt-3">
+                @can('entregas.crearentregas')
+                <div class="card card-primary">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
@@ -55,13 +61,17 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-md-3">
+
                                     <button class="btn btn-success btn-block" wire:click='save'><i
                                             class="fas fa-save"></i> Registrar Entrega</button>
+
+
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
+                @endcan
                 <div class="card card-secondary">
                     <div class="card-header text-center">
                         LISTADO DE ENTREGAS MANUALES
@@ -134,11 +144,14 @@
                                         <td>{{ $entregam->empresa }}</td>
                                         <td>{{ $entregam->franja }}</td>
                                         <td align="right">
+                                            @can('entregas.anular')
                                             <button class="btn btn-warning btn-sm" onclick="eliminar({{$entregam->id}})"
                                                 title="Anular">
                                                 <i class="fa fa-fw fa-trash"></i>
 
                                             </button>
+                                            @endcan
+
                                         </td>
                                     </tr>
                                     @endforeach

@@ -27,8 +27,7 @@
 
                 </select>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="incluir"
-                        wire:model="incluirTodas">
+                    <input type="checkbox" class="form-check-input" id="incluir" wire:model="incluirTodas">
                     <label class="form-check-label" for="incluir"><small>Incluir Contratistas</small></label>
                 </div>
             </div>
@@ -38,7 +37,8 @@
 
                 <div class="row">
                     <div class="col-6">
-                        <button class="btn btn-danger btn-block" wire:click='pdf' wire:loading.attr='disabled'><i class="fas fa-file-pdf"></i>
+                        <button class="btn btn-danger btn-block" wire:click='pdf' wire:loading.attr='disabled'><i
+                                class="fas fa-file-pdf"></i>
                             PDF</button>
                     </div>
                     <div class="col-6">
@@ -79,21 +79,12 @@
                     <td>{{ $entrega->empresa }}</td>
                     <td>{{ $entrega->franja }}</td>
                     <td>
-                        <button type="submit" class="btn btn-warning btn-sm" title="Anular" onclick="anular({{$entrega->id}})"><i class="fa fa-fw fa-trash"
-                            ></i></button>
+                        @can('entregas.anular')
+                        <button type="submit" class="btn btn-warning btn-sm" title="Anular"
+                            onclick="anular({{$entrega->id}})"><i class="fa fa-fw fa-trash"></i></button>
+                        @endcan
+
                     </td>
-                    {{-- <td style="width: 200px" align="right"> --}}
-                        {{-- <form action="{{ route('entregas.destroy',$entrega->id) }}" method="POST">
-                            <a class="btn btn-sm btn-primary " href="{{ route('entregas.show',$entrega->id) }}"
-                                title="Ver Info"><i class="fa fa-fw fa-eye"></i></a>
-                            <a class="btn btn-sm btn-success" href="{{ route('entregas.edit',$entrega->id) }}"
-                                title="Editar"><i class="fa fa-fw fa-edit"></i></a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"
-                                    title="Eliminar"></i></button>
-                        </form> --}}
-                        {{-- </td> --}}
                 </tr>
                 @endforeach
 

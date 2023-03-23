@@ -16,6 +16,8 @@ use Livewire\WithPagination;
 
 class Manuales extends Component
 {
+
+
     use WithPagination;
     public $cliente = null,  $nombre = "", $fechaEntrega = "", $horaEntrega = "", $selFranja = "";
     public $busqueda = "", $cnombrecliente = '', $cselTurno = '';
@@ -69,6 +71,7 @@ class Manuales extends Component
 
         $this->emit('datatables', '');
         $this->emit('updateSelect2');
+        
         return view('livewire.entregas.manuales', compact('clientes', 'franjas', 'entregasmanuales'))->extends('adminlte::page');
     }
 

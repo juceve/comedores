@@ -13,6 +13,8 @@
                     </div>
 
                     <div class="card-body">
+
+                        @can('clientesturnos.adicionar')
                         <div class="content">
                             <div class="row mb-3">
                                 <div class="col-12 col-md-6 ">
@@ -24,19 +26,6 @@
                                             <button class="btn btn-outline-primary" type="button" id="button-addon2"
                                                 data-placement="left" data-toggle="modal" data-target="#modalNuevo"><i
                                                     class="fas fa-search"></i> Avanzada</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3 ">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="incluir"
-                                            wire:model="incluirTodas" wire:loading.attr="disabled">
-                                        <label class="form-check-label" for="incluir"><small>Incluir
-                                                Turno General</small></label>
-                                        <div wire:loading.delay
-                                            class="z-50 static flex fixed left-0 top-0 bottom-0 w-full bg-gray-400 bg-opacity-50">
-                                            <img src="https://paladins-draft.com/img/circle_loading.gif" width="40"
-                                                height="40" class="m-auto mt-1/4">
                                         </div>
                                     </div>
                                 </div>
@@ -67,6 +56,22 @@
                                     <button class="btn btn-success btn-block" wire:click='save'><i
                                             class="fas fa-arrow-down"></i> Agregar</button>
                                 </div>
+
+                            </div>
+                        </div><hr>
+                        @endcan
+                        
+                        <div class="row col-12 col-md-3 ">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="incluir" wire:model="incluirTodas"
+                                    wire:loading.attr="disabled">
+                                <label class="form-check-label" for="incluir"><small>Incluir
+                                        Turno General</small></label>
+                                <div wire:loading.delay
+                                    class="z-50 static flex fixed left-0 top-0 bottom-0 w-full bg-gray-400 bg-opacity-50">
+                                    <img src="https://paladins-draft.com/img/circle_loading.gif" width="40" height="40"
+                                        class="m-auto mt-1/4">
+                                </div>
                             </div>
                         </div>
                         <hr>
@@ -94,17 +99,22 @@
                                         <td>{{ $clienteturno->turno->nombre }}</td>
 
                                         <td align="right">
+                                            @can('clientesturnos.cambia')
                                             <button class="btn btn-warning btn-sm" title="Cambiar turno"
                                                 data-toggle="modal" data-target="#modalCambioTurno"
                                                 wire:click='selCambioTurno({{$clienteturno->id}})'>
                                                 <i class="fas fa-exchange-alt"></i>
                                             </button>
+                                            @endcan
+                                            @can('clientesturnos.elimina')
                                             <button class="btn btn-danger btn-sm"
                                                 onclick="eliminar({{$clienteturno->id}},'{{$clienteturno->cliente->nombre}}')"
                                                 title="Remover">
                                                 <i class="fa fa-fw fa-trash"></i>
 
                                             </button>
+                                            @endcan
+
                                         </td>
                                     </tr>
                                     @endforeach

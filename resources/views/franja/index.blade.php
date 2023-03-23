@@ -16,12 +16,14 @@ Franjas
                             LISTADO DE FRANJAS HORARIAS
                         </span>
 
+                        @can('franjas.create')
                         <div class="float-right">
                             <a href="{{ route('franjas.create') }}" class="btn btn-primary btn-sm float-right"
                                 data-placement="left">
                                 <i class="fas fa-plus"></i> Nuevo
                             </a>
                         </div>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
@@ -52,13 +54,17 @@ Franjas
                                             <a class="btn btn-sm btn-primary "
                                                 href="{{ route('franjas.show',$franja->id) }}"><i
                                                     class="fa fa-fw fa-eye"></i> Ver</a>
+                                            @can('franjas.edit')
                                             <a class="btn btn-sm btn-success"
                                                 href="{{ route('franjas.edit',$franja->id) }}"><i
                                                     class="fa fa-fw fa-edit"></i> Editar</a>
+                                            @endcan
                                             @csrf
                                             @method('DELETE')
+                                            @can('franjas.destroy')
                                             <button type="submit" class="btn btn-danger btn-sm"><i
                                                     class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

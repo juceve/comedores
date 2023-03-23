@@ -294,36 +294,37 @@ return [
             'text'        => 'Dashboard',
             'url'         => 'home',
             'icon'        => 'fas fa-fw fa-tachometer-alt',
-        ],
-        // [
-        //     'text'    => 'COMEDOR',
-        //     'icon'    => 'fas fa-fw fa-store-alt',
-        //     'submenu' => [
+            'can'         => 'home'
+        ],        
         [
             'text' => 'Clientes',
             'url'  => 'clientes',
             'icon' => 'fas fa-fw fa-address-book',
+            'can'  => 'clientes.index'
         ],
         [
             'text' => 'Entregas',
             'url'  => 'entregas',
             'icon' => 'fas fa-fw fa-clipboard-check',
+            'can'  => 'entregas.index',
         ],
         [
             'text' => 'Clientes por Turno',
             'url'  => 'clienteturnos',
             'icon' => 'fas fa-fw fa-user-clock',
+            'can'  => 'clientesturnos.listado',
         ],
         [
             'text' => 'Reservas',
             'url'  => 'reservas',
             'icon' => 'fas fa-fw fa-business-time',
         ],  
-        // [
-        //     'text' => 'Entregas Manuales',
-        //     'url'  => 'entregasmanuales',
-        //     'icon' => 'fas fa-fw fa-calendar-plus',
-        // ],         
+        [
+            'text' => 'Entregas Manuales',
+            'url'  => 'entregasmanuales',
+            'icon' => 'fas fa-fw fa-calendar-plus',
+            'can'  => 'entregas.entregasmanuales',
+        ],         
         [
             'text'    => 'REPORTES',
             'icon'    => 'fas fa-fw fa-chart-pie',
@@ -358,16 +359,30 @@ return [
                     'text' => 'Franjas horarias',
                     'url'  => 'franjas',
                     'icon' => 'fas fa-fw fa-business-time',
+                    'can'  => 'franjas.index',
                 ],
                 [
                     'text' => 'Turnos',
                     'url'  => 'turnos',
                     'icon' => 'fas fa-fw fa-hourglass-end',
+                    'can'  => 'turnos.index',
                 ],
                 [
                     'text' => 'Empresas',
                     'url'  => 'empresas',
                     'icon' => 'fas fa-fw fa-building',
+                ],
+                [
+                    'text' => 'Usuarios',
+                    'url'  => 'users',
+                    'icon' => 'fas fa-fw fa-users',
+                    'can'  => 'users.index',
+                ],
+                [
+                    'text' => 'Roles y Permisos',
+                    'url'  => 'roles',
+                    'icon' => 'fas fa-fw fa-user-cog',
+                    'can' => 'roles.index',
                 ],
             ],
         ],

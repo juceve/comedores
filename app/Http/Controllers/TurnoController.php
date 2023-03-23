@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class TurnoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:turnos.index')->only('index');
+        $this->middleware('can:turnos.edit')->only('edit','update');
+        $this->middleware('can:turnos.create')->only('create','store');
+        $this->middleware('can:turnos.destroy')->only('destroy');
+    }
 
     public function index()
     {
@@ -30,7 +37,7 @@ class TurnoController extends Controller
         $turno = Turno::create($request->all());
 
         return redirect()->route('turnos.index')
-            ->with('success', 'Turno created successfully.');
+            ->with('success', 'Turno creado correctamente.');
     }
 
     public function show($id)
@@ -54,7 +61,7 @@ class TurnoController extends Controller
         $turno->update($request->all());
 
         return redirect()->route('turnos.index')
-            ->with('success', 'Turno updated successfully');
+            ->with('success', 'Turno actualizado correctamente');
     }
 
     public function destroy($id)
