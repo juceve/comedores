@@ -8,6 +8,7 @@ use App\Http\Controllers\EntregasmanualeController;
 use App\Http\Controllers\exportExcelController;
 use App\Http\Controllers\FranjaController;
 use App\Http\Controllers\MensualidadeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ReservalunchController;
 use App\Http\Controllers\RoleController;
@@ -40,7 +41,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('users',UserController::class)->only(['index','edit','update'])->names('users');
+Route::resource('users',UserController::class)->names('users');
+Route::get('profile', [ProfileController::class,'index'])->middleware('auth')->name('profile');
+// Route::post('changePassword', [ProfileController::class,'changePassword'])->middleware('auth')->name('changePassword');
+
+Route::get('/changePassword', [ProfileController::class, 'showChangePasswordGet'])->middleware('auth')->name('changePasswordGet');
+Route::post('/changePassword', [ProfileController::class, 'changePasswordPost'])->middleware('auth')->name('changePasswordPost');
+Route::post('/resetPassword/{id}', [UserController::class, 'resetPassword'])->middleware('auth')->name('resetPassword');
+
 Route::resource('roles',RoleController::class)->names('roles');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
@@ -67,3 +75,4 @@ Route::get('reporte.diario',Diario::class)->middleware('auth')->name('diario');
 Route::get('reporte.aprobaciones',RepDiario::class)->name('repdiario');
 
 Route::resource('mensualidades', MensualidadeController::class)->names('mensualidades');
+

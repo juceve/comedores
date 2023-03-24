@@ -17,18 +17,17 @@ USUARIOS
                         </span>
 
                         <div class="float-right">
-                            {{-- <a href="{{ route('users.create') }}" class="btn btn-secondary btn-sm float-right"
+                            @can('users.create')
+                            <a href="{{ route('users.create') }}" class="btn btn-secondary btn-sm float-right"
                                 data-placement="left">
                                 <i class="fas fa-plus"></i> Nuevo
-                            </a> --}}
+                            </a>
+                            @endcan
+
                         </div>
                     </div>
                 </div>
-                @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-                @endif
+
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -56,8 +55,17 @@ USUARIOS
 
                                     <td>
                                         @can('users.edit')
-                                        <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i
-                                                class="fa fa-fw fa-edit"></i> Editar Rol </a>
+                                        <form class="form-horizontal reset" method="POST"
+                                            action="{{ route('resetPassword',$user->id) }}">
+                                            @csrf
+                                            <a class="btn btn-sm btn-success"
+                                                href="{{ route('users.edit',$user->id) }}"><i
+                                                    class="fa fa-fw fa-edit"></i> Editar Rol </a>
+
+                                            <button type="submit" class="btn btn-sm btn-warning">
+                                                <i class="fas fa-key"></i> Reset Password
+                                            </button>
+                                        </form>
                                         @endcan
                                     </td>
                                 </tr>
@@ -73,9 +81,46 @@ USUARIOS
 </div>
 @endsection
 @section('js')
+@if ($message = Session::get('success'))
+<script>
+    Swal.fire(
+  'Excelente!',
+  '{{ $message }}',
+  'success'
+)
+</script>
+@endif
+@if ($message = Session::get('error'))
+<script>
+    Swal.fire(
+  'Atención!',
+  '{{ $message }}',
+  'error'
+)
+</script>
+@endif
+
 <script>
     $(document).ready(function () {
             $('.dataTable').DataTable();
+        });
+        
+        $('.reset').submit(function (e) { 
+            e.preventDefault();
+            Swal.fire({
+                title: 'Restablecer Password',
+                text: "Está seguro de realizar esta operación?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, cancelar',
+                confirmButtonText: 'Si, continuar!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+                })            
         });
 </script>
 @endsection

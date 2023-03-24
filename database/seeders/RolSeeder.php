@@ -61,6 +61,7 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'reportes.aprovreservas','grupo' => 'REPORTES', 'descripcion' => 'Aprob. Reservas'])->syncRoles([$role1]);
 
         Permission::create(['name' => 'users.index', 'grupo' => 'USUARIOS', 'descripcion' => 'Ver listado'])->syncRoles([$role1]);
+        Permission::create(['name' => 'users.create', 'grupo' => 'USUARIOS', 'descripcion' => 'Crear'])->syncRoles([$role1]);
         Permission::create(['name' => 'users.edit', 'grupo' => 'USUARIOS', 'descripcion' => 'Asignar Rol'])->syncRoles([$role1]);
         
         Permission::create(['name' => 'roles.index', 'grupo' => 'ROLES', 'descripcion' => 'Ver listado'])->syncRoles([$role1]);
