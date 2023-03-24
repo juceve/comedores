@@ -36,7 +36,7 @@
         <small>Del {{$fechai}} al {{$fechaf}} </small><br>
     </div>
     <hr>
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" style="font-size: 11px;">
         <thead style="background-color: #d1d1d1;">
             <tr>
                 <th>Nro</th>
@@ -44,7 +44,8 @@
                 <th>FECHA</th>
                 <th>CLIENTE</th>
                 <th>PRODUCTO</th>
-
+                <th>EMPRESA</th>
+                <th>ESTADO</th>
             </tr>
         </thead>
         <tbody>
@@ -59,7 +60,8 @@
                 <td>{{ $entrega->created_at }}</td>
                 <td>{{ $entrega->cliente }}</td>
                 <td>{{ $entrega->franja }}</td>
-
+                <td>{{ $entrega->empresa }}</td>
+                <td>{{ $entrega->estado?'ACTIVO':'ANULADO' }}</td>
 
             </tr>
             @endforeach

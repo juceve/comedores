@@ -4,170 +4,187 @@
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 @endsection
 @section('content')
-<div class="container-fluid">
-    <h2 class="mt-2 text-secondary text-center">Bienvenido al Control de Comedores</h2>
-    <hr>
+@php
+$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+$fechaActual = strtotime(date('Y-m-d H:i:s'));
+$fechaI = strtotime(date('Y-m-').'22 00:00:00');
+$fechaF = strtotime(date('Y-m-').'27 23:59:59');
+@endphp
 
-    <h4 class="text-secondary">Entregas de Hoy</h4>
-
-    <div class="row mt-3">
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    @php
-                    $desayuno=null;
-                    foreach ($desayunos as $item) {
-                    $desayuno = $item;
-                    }
-                    @endphp
-                    <h4>Desayunos</h4>
-                    <p>
-                        @if (!is_null($desayuno))
-                        <strong>Cantidad:</strong> {{$desayuno->cantidad}} <br>
-                        <strong>Importe Bs:</strong> {{number_format($desayuno->total, 2, '.', ',')}}
-                        @else
-                        <strong>Cantidad:</strong> 0 <br>
-                        <strong>Importe Bs:</strong> 0
-                    @endif
-
-                    </p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-coffee"></i>
-                </div>
-                <a href="/entregas" class="small-box-footer">Mas información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
+    @if (($fechaActual > $fechaI) && ($fechaActual < $fechaF)) 
+    @if (is_null($mensualidad))
+       <div class="alert alert-danger alert-dismissible mt-3">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+            Evite el corte del servicio el día 27 de {{$meses[date('n')-1];}} del presente, realizando el pago de mantenimiento
+            correspondiente al mes de {{$meses[date('n')-2];}}.
         </div>
-        
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-                <div class="inner">
-                    @php
-                    $almuerzo=null;
-                    foreach ($almuerzos as $item) {
-                    $almuerzo = $item;
-                    }
-                    @endphp
-                    <h4>Almuerzos</h4>
-                    <p>
-                        @if (!is_null($almuerzo))
-                        <strong>Cantidad:</strong> {{$almuerzo->cantidad}} <br>
-                        <strong>Importe Bs:</strong> {{number_format($almuerzo->total, 2, '.', ',')}}
-                        @else
-                        <strong>Cantidad:</strong> 0 <br>
-                        <strong>Importe Bs:</strong> 0
-                    @endif
+        @endif
+    @endif
+    <div class="container-fluid">
+        <h2 class="mt-2 text-secondary text-center">Bienvenido al Control de Comedores</h2>
+        <hr>
 
-                    </p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-pizza-slice"></i>
-                </div>
-                <a href="/entregas" class="small-box-footer">Mas información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
+        <h4 class="text-secondary">Entregas de Hoy</h4>
 
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-                <div class="inner">
-                    @php
-                    $cena=null;
-                    foreach ($cenas as $item) {
-                    $cena = $item;
-                    }
-                    @endphp
-                    <h4>Cenas</h4>
-                    <p>
-                        @if (!is_null($cena))
-                        <strong>Cantidad:</strong> {{$cena->cantidad}} <br>
-                        <strong>Importe Bs:</strong> {{number_format($cena->total, 2, '.', ',')}}
-                        @else
-                        <strong>Cantidad:</strong> 0 <br>
-                        <strong>Importe Bs:</strong> 0
-                    @endif
+        <div class="row mt-3">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        @php
+                        $desayuno=null;
+                        foreach ($desayunos as $item) {
+                        $desayuno = $item;
+                        }
+                        @endphp
+                        <h4>Desayunos</h4>
+                        <p>
+                            @if (!is_null($desayuno))
+                            <strong>Cantidad:</strong> {{$desayuno->cantidad}} <br>
+                            <strong>Importe Bs:</strong> {{number_format($desayuno->total, 2, '.', ',')}}
+                            @else
+                            <strong>Cantidad:</strong> 0 <br>
+                            <strong>Importe Bs:</strong> 0
+                            @endif
 
-                    </p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-hamburger"></i>
-                </div>
-                <a href="/entregas" class="small-box-footer">Mas información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    @php
-                    $lunch=null;
-                    foreach ($lunchs as $item) {
-                    $lunch = $item;
-                    }
-                    @endphp
-                    <h4>Lunch's</h4>
-                    <p>
-                        @if (!is_null($lunch))
-                        <strong>Cantidad:</strong> {{$lunch->cantidad}} <br>
-                        <strong>Importe Bs:</strong> {{number_format($lunch->total, 2, '.', ',')}}
-                        @else
-                        <strong>Cantidad:</strong> 0 <br>
-                        <strong>Importe Bs:</strong> 0
-                    @endif
-
-                    </p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-cookie"></i>
-                </div>
-                <a href="/entregas" class="small-box-footer">Mas información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        
-    </div>
-    <hr>
-
-
-    <div class="row">
-        <div class="col-12">
-            <h4>Entregas Mensuales</h4>
-            <div class="card card-success">
-                <div class="card-header">
-                    <h3 class="card-title">Cantidad de Entregas por Empresa</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
+                        </p>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="" style="height: 500px;">
-                        <canvas id="myChart"></canvas>
+                    <div class="icon">
+                        <i class="fas fa-coffee"></i>
                     </div>
+                    <a href="/entregas" class="small-box-footer">Mas información <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
-                <!-- /.card-body -->
+            </div>
+
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        @php
+                        $almuerzo=null;
+                        foreach ($almuerzos as $item) {
+                        $almuerzo = $item;
+                        }
+                        @endphp
+                        <h4>Almuerzos</h4>
+                        <p>
+                            @if (!is_null($almuerzo))
+                            <strong>Cantidad:</strong> {{$almuerzo->cantidad}} <br>
+                            <strong>Importe Bs:</strong> {{number_format($almuerzo->total, 2, '.', ',')}}
+                            @else
+                            <strong>Cantidad:</strong> 0 <br>
+                            <strong>Importe Bs:</strong> 0
+                            @endif
+
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-pizza-slice"></i>
+                    </div>
+                    <a href="/entregas" class="small-box-footer">Mas información <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        @php
+                        $cena=null;
+                        foreach ($cenas as $item) {
+                        $cena = $item;
+                        }
+                        @endphp
+                        <h4>Cenas</h4>
+                        <p>
+                            @if (!is_null($cena))
+                            <strong>Cantidad:</strong> {{$cena->cantidad}} <br>
+                            <strong>Importe Bs:</strong> {{number_format($cena->total, 2, '.', ',')}}
+                            @else
+                            <strong>Cantidad:</strong> 0 <br>
+                            <strong>Importe Bs:</strong> 0
+                            @endif
+
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <a href="/entregas" class="small-box-footer">Mas información <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        @php
+                        $lunch=null;
+                        foreach ($lunchs as $item) {
+                        $lunch = $item;
+                        }
+                        @endphp
+                        <h4>Lunch's</h4>
+                        <p>
+                            @if (!is_null($lunch))
+                            <strong>Cantidad:</strong> {{$lunch->cantidad}} <br>
+                            <strong>Importe Bs:</strong> {{number_format($lunch->total, 2, '.', ',')}}
+                            @else
+                            <strong>Cantidad:</strong> 0 <br>
+                            <strong>Importe Bs:</strong> 0
+                            @endif
+
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-cookie"></i>
+                    </div>
+                    <a href="/entregas" class="small-box-footer">Mas información <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+
+
+        <div class="row">
+            <div class="col-12">
+                <h4>Entregas Mensuales</h4>
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">Cantidad de Entregas por Empresa</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="" style="height: 500px;">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
             </div>
         </div>
+
+
+
     </div>
-
-
-
-</div>
-@endsection
-@section('js')
-<script>
-    const ctx = document.getElementById('myChart');
+    @endsection
+    @section('js')
+    <script>
+        const ctx = document.getElementById('myChart');
     var empresas = "{{$empresa}}";
     var cantidad = "{{$cantidad}}";
     var labels = empresas.split("|");
@@ -191,6 +208,6 @@
         }
     }
     });
-</script>
-@endsection
-@section('plugins.Chartjs', true)
+    </script>
+    @endsection
+    @section('plugins.Chartjs', true)

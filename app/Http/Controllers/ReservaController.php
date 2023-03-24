@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\DB;
 class ReservaController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:clientes.index')->only('index');
+        $this->middleware('can:clientes.approve')->only('approved','approvedAll');
+        $this->middleware('can:clientes.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $reservas = Reserva::where('fecha',date('Y-m-d'))
@@ -19,33 +26,6 @@ class ReservaController extends Controller
 
         return view('reserva.index', compact('reservas'));
     }
-
-
-    public function create()
-    {
-        $reserva = new Reserva();
-        return view('reserva.create', compact('reserva'));
-    }
-
-
-    public function store(Request $request)
-    {
-        request()->validate(Reserva::$rules);
-
-        $reserva = Reserva::create($request->all());
-
-        return redirect()->route('reservas.index')
-            ->with('success', 'Reserva created successfully.');
-    }
-
-
-    public function show($id)
-    {
-        $reserva = Reserva::find($id);
-
-        return view('reserva.show', compact('reserva'));
-    }
-
 
 
     public function approved($id)

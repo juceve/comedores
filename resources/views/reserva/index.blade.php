@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title')
-CLIENTES
+RESERVAS
 @endsection
 
 @section('content')
@@ -15,10 +15,10 @@ CLIENTES
                         <span id="card_title">
                             {{ __('Reserva') }}
                         </span>
-                        
+
                     </div>
                 </div>
-               
+
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -61,9 +61,12 @@ CLIENTES
                                                 <form action="{{ route('approved',$reserva->id) }}" method="POST"
                                                     onsubmit="return false" class="prevConfirm">
                                                     @csrf
+                                                    @can('reservas.approve')
                                                     <button style="width: 100px;" type="submit"
                                                         class="btn btn-primary btn-sm"><i class="fas fa-check"></i>
                                                         Aprobar</button>
+                                                    @endcan
+
                                                 </form>
                                             </div>
                                             <div class="col-6">
@@ -71,9 +74,12 @@ CLIENTES
                                                     method="POST" onsubmit="return false" class="eliminar">
                                                     @csrf
                                                     @method('DELETE')
+                                                    @can('reservas.destroy')
                                                     <button style="width: 100px;" type="submit"
                                                         class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>
                                                         Eliminar</button>
+                                                    @endcan
+
                                                 </form>
                                             </div>
                                         </div>
@@ -86,11 +92,14 @@ CLIENTES
                     @if ($reservas->count() > 0)
                     <div class="row">
                         <div class="col-12 col-md-4 mt-3">
-                            <form action="{{ route('approvedAll') }}" method="POST"
-                                onsubmit="return false" class="prevConfirmAll">
+                            <form action="{{ route('approvedAll') }}" method="POST" onsubmit="return false"
+                                class="prevConfirmAll">
                                 @csrf
+                                @can('reservas.approve')
                                 <button class="btn btn-success btn-block"><i class="fas fa-check-double"></i> Aprobar
                                     Todo</button>
+                                @endcan
+
                             </form>
                         </div>
                     </div>

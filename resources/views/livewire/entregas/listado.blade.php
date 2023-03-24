@@ -64,8 +64,8 @@
                     <th>CLIENTE</th>
                     <th>EMPRESA</th>
                     <th>PRODUCTO</th>
-
-                    {{-- <th></th> --}}
+                    <th>ESTADO</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -78,6 +78,13 @@
                     <td>{{ $entrega->cliente }}</td>
                     <td>{{ $entrega->empresa }}</td>
                     <td>{{ $entrega->franja }}</td>
+                    <td>
+                        @if ($entrega->estado)
+                        <span class="badge badge-pill badge-success">Activo</span>
+                        @else
+                        <span class="badge badge-pill badge-secondary">Anulado</span>
+                        @endif
+                    </td>
                     <td>
                         @can('entregas.anular')
                         <button type="submit" class="btn btn-warning btn-sm" title="Anular"

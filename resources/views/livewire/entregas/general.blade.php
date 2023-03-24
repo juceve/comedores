@@ -82,80 +82,82 @@
                             $totalImporte = 0;
                             $b=0;
                             @endphp
+
+
                             @foreach ($contenedor as $item)
-                            @if ($b > 0)
-                            <tr >
-                                <td></td>
-                                <td align="right" class="table-secondary"><strong>TOTAL</strong></td>
-                                <td align="right" class="table-secondary"><strong>{{$totalclientecantidad}}</strong></td>
-                                <td align="right" class="table-secondary"><strong>{{number_format($totalclienteimporte, 2, '.', ',');}}</strong></td>
-                            </tr>
-                            <tr><td colspan="4"> </td></tr>
-                            @endif
-                            <tr class="table-secondary">
-                                <td><b> {{$item[0]}}</b></td>
-                                <td><b></b></td>
-                                <td align="right"><b> {{$item[1]}}</b></td>
-                                <td align="right"><b> {{number_format($item[3], 2, '.', ',');}}</b></td>
-                            </tr>
-                            <tr><td colspan="4"> </td></tr>
-                            @php
-                            $totalImporte = $totalImporte + $item[3];
-                            $datas = $item[2];
-
-                            @endphp
-
-                            @if (count($datas))
-                                @php
-                                $cliente = "";
-                                $b2 = 0;
-                                @endphp
-                                @foreach ($datas as $data)
-                                    @if ($cliente != $data[0])                                        
-                                        @if ($b2 > 0)
-                                            <tr >
-                                                <td></td>
-                                                <td align="right" class="table-secondary"><strong>TOTAL</strong></td>
-                                                <td align="right" class="table-secondary"><strong>{{$totalclientecantidad}}</strong></td>
-                                                <td align="right" class="table-secondary"><strong>{{number_format($totalclienteimporte, 2, '.', ',');}}</strong></td>
-                                            </tr>
-                                            <tr><td colspan="4"> </td></tr>
-                                        @endif
-                                        @php
-                                        $cliente = $data[0];
-                                        $totalclientecantidad = 0;
-                                        $totalclienteimporte = 0;
-                                        $b2++;
-                                        @endphp
-                                        <tr >
-                                            <td></td>
-                                            <td class="table-secondary"><strong>{{$data[0]}}</strong></td>
-                                            <td class="table-secondary"></td>
-                                            <td class="table-secondary"></td>
-                                        </tr>
+                                    @if ($b > 0)
+                                    <tr >
+                                        <td></td>
+                                        <td align="right" class="table-secondary"><strong>TOTAL</strong></td>
+                                        <td align="right" class="table-secondary"><strong>{{$totalclientecantidad}}</strong></td>
+                                        <td align="right" class="table-secondary"><strong>{{number_format($totalclienteimporte, 2, '.', ',');}}</strong></td>
+                                    </tr>
+                                    <tr><td colspan="4"> </td></tr>
                                     @endif
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-2 col-md-6"></div>
-                                            <div class="col-10 col-md-6">
-                                                {{$data[1]}}
-                                            </div>
-                                        </div>                                        
-                                    </td>
-                                    <td align="right">{{$data[2]}}</td>
-                                    <td align="right">{{number_format($data[3], 2, '.', ',');}}</td>
-                                </tr>
-                                @php
-                                    $totalclientecantidad = $totalclientecantidad + $data[2];
-                                    $totalclienteimporte = $totalclienteimporte + $data[3];
-                                @endphp
-                                @endforeach
-                            @endif
-                                @php
-                                    $b++;
-                                @endphp
+                                    <tr class="table-secondary">
+                                        <td><b> {{$item[0]}}</b></td>
+                                        <td><b></b></td>
+                                        <td align="right"><b> {{$item[1]}}</b></td>
+                                        <td align="right"><b> {{number_format($item[3], 2, '.', ',');}}</b></td>
+                                    </tr>
+                                    <tr><td colspan="4"> </td></tr>
+                                    @php
+                                    $totalImporte = $totalImporte + $item[3];
+                                    $datas = $item[2];
+
+                                    @endphp
+
+                                    @if (count($datas))
+                                        @php
+                                        $cliente = "";
+                                        $b2 = 0;
+                                        @endphp
+                                        @foreach ($datas as $data)
+                                            @if ($cliente != $data[0])                                        
+                                                @if ($b2 > 0)
+                                                    <tr >
+                                                        <td></td>
+                                                        <td align="right" class="table-secondary"><strong>TOTAL</strong></td>
+                                                        <td align="right" class="table-secondary"><strong>{{$totalclientecantidad}}</strong></td>
+                                                        <td align="right" class="table-secondary"><strong>{{number_format($totalclienteimporte, 2, '.', ',');}}</strong></td>
+                                                    </tr>
+                                                    <tr><td colspan="4"> </td></tr>
+                                                @endif
+                                                @php
+                                                $cliente = $data[0];
+                                                $totalclientecantidad = 0;
+                                                $totalclienteimporte = 0;
+                                                $b2++;
+                                                @endphp
+                                                <tr >
+                                                    <td></td>
+                                                    <td class="table-secondary"><strong>{{$data[0]}}</strong></td>
+                                                    <td class="table-secondary"></td>
+                                                    <td class="table-secondary"></td>
+                                                </tr>
+                                            @endif
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-2 col-md-6"></div>
+                                                    <div class="col-10 col-md-6">
+                                                        {{$data[1]}}
+                                                    </div>
+                                                </div>                                        
+                                            </td>
+                                            <td align="right">{{$data[2]}}</td>
+                                            <td align="right">{{number_format($data[3], 2, '.', ',');}}</td>
+                                        </tr>
+                                        @php
+                                            $totalclientecantidad = $totalclientecantidad + $data[2];
+                                            $totalclienteimporte = $totalclienteimporte + $data[3];
+                                        @endphp
+                                        @endforeach
+                                    @endif
+                                        @php
+                                            $b++;
+                                        @endphp
                             @endforeach
                             <tr >
                                 <td></td>

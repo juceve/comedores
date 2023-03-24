@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Entrega;
+use App\Models\Mensualidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -63,6 +64,10 @@ class HomeController extends Controller
         $lunchs =  DB::select($sql);
 
         ///////////////////////////////////////////////////////////////////////////////////////
+        $feccontrol = date('m', strtotime('-1 month')).date('-Y');
+        $mensualidad = Mensualidade::where('feccontrol',$feccontrol)->first();
+
+        ///////////////////////////////////////////////////////////////////////////////////////
         $mensuales = DB::table('entregas')
             ->join('clientes', 'clientes.id', '=', 'entregas.cliente_id')
             ->join('empresas', 'empresas.id', '=', 'clientes.empresa_id')
@@ -83,6 +88,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('home', compact('clientes', 'desayunos', 'almuerzos', 'cenas', 'lunchs', 'empresa', 'cantidad'));
+        return view('home', compact('clientes', 'desayunos', 'almuerzos', 'cenas', 'lunchs', 'empresa', 'cantidad','mensualidad'));
     }
 }

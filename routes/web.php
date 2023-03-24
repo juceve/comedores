@@ -7,6 +7,7 @@ use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\EntregasmanualeController;
 use App\Http\Controllers\exportExcelController;
 use App\Http\Controllers\FranjaController;
+use App\Http\Controllers\MensualidadeController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ReservalunchController;
 use App\Http\Controllers\RoleController;
@@ -64,3 +65,5 @@ Route::get('reporte.prodxemp', Productosxempresas::class)->name('productosxempre
 Route::get('reporte.general', General::class)->name('general');
 Route::get('reporte.diario',Diario::class)->middleware('auth')->name('diario');
 Route::get('reporte.aprobaciones',RepDiario::class)->name('repdiario');
+
+Route::resource('mensualidades', MensualidadeController::class)->names('mensualidades');

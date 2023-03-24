@@ -1,11 +1,11 @@
 <table class="table table-striped table-bordered">
     <tr>
-        <td align="center" colspan="4">
+        <td align="center" colspan="6">
             LISTADO DE ENTREGAS       
         </td>
     </tr>
     <tr>
-        <td align="center" colspan="4">
+        <td align="center" colspan="6">
             Del {{$fechai}} al {{$fechaf}}
         </td>
     </tr>
@@ -16,7 +16,8 @@
             <th>FECHA</th>
             <th>CLIENTE</th>
             <th>PRODUCTO</th>
-
+            <th>EMPRESA</th>
+            <th>ESTADO</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,8 @@
             <td>{{ $entrega->created_at }}</td>
             <td>{{ $entrega->cliente }}</td>
             <td>{{ $entrega->franja }}</td>
+            <td>{{ $entrega->empresa }}</td>
+            <td>{{ $entrega->estado?'Activo':'Anulado' }}</td>
 
 
         </tr>

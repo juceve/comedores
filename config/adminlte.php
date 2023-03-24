@@ -318,6 +318,7 @@ return [
             'text' => 'Reservas',
             'url'  => 'reservas',
             'icon' => 'fas fa-fw fa-business-time',
+            'can'  => 'reservas.index',
         ],  
         [
             'text' => 'Entregas Manuales',
@@ -328,26 +329,31 @@ return [
         [
             'text'    => 'REPORTES',
             'icon'    => 'fas fa-fw fa-chart-pie',
+            'can'     => 'reportes.index',
             'submenu' => [
                 [
                     'text' => 'Entregas General',
                     'url'  => 'reporte.general',
                     'icon' => 'fas fa-fw fa-file-alt',
+                    'can'  => 'reportes.general',
                 ],
                 [
                     'text' => 'Entregas Diarias',
                     'url'  => 'reporte.diario',
                     'icon' => 'fas fa-fw fa-file-alt',
+                    'can'  => 'reportes.diario',
                 ],
                 [
                     'text' => 'Productos por Empresa',
                     'url'  => 'reporte.prodxemp',
                     'icon' => 'fas fa-fw fa-file-alt',
+                    'can'  => 'reportes.prodxemp',
                 ],                
                 [
                     'text' => 'Aprobaciones Reservas',
                     'url'  => 'reporte.aprobaciones',
                     'icon' => 'fas fa-fw fa-file-alt',
+                    'can'  => 'reportes.aprovreservas',
                 ],
             ],
         ],
@@ -371,6 +377,7 @@ return [
                     'text' => 'Empresas',
                     'url'  => 'empresas',
                     'icon' => 'fas fa-fw fa-building',
+                    'can'  => 'empresas.index',
                 ],
                 [
                     'text' => 'Usuarios',
@@ -385,6 +392,12 @@ return [
                     'can' => 'roles.index',
                 ],
             ],
+        ],
+        [
+            'text' => 'Mensualidades',
+            'route'  => 'mensualidades.index',
+            'icon' => 'fas fa-fw fa-file-invoice-dollar',
+            'can' => 'mensualidades.index',
         ],
         [
             'text' => 'Ir al Inicio',
