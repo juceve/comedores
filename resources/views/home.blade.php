@@ -5,26 +5,28 @@
 @endsection
 @section('content')
 @php
-$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+$meses =
+array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 $fechaActual = strtotime(date('Y-m-d H:i:s'));
 $fechaI = strtotime(date('Y-m-').'22 00:00:00');
 $fechaF = strtotime(date('Y-m-').'27 23:59:59');
 @endphp
 
-    @if (($fechaActual > $fechaI) && ($fechaActual < $fechaF)) 
-    @if (is_null($mensualidad))
-       <div class="alert alert-danger alert-dismissible mt-3">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
-            Evite el corte del servicio el día 27 de {{$meses[date('n')-1];}} del presente, realizando el pago de mantenimiento
-            correspondiente al mes de {{$meses[date('n')-2];}}.
-        </div>
-        @endif
+@if (($fechaActual > $fechaI) && ($fechaActual < $fechaF)) @if (is_null($mensualidad)) <div
+    class="alert alert-danger alert-dismissible mt-3">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+    Evite el corte del servicio el día 27 de {{$meses[date('n')-1];}} del presente, realizando el pago de mantenimiento
+    correspondiente al mes de {{$meses[date('n')-2];}}.
+    </div>
+    @endif
     @endif
     <div class="container-fluid">
+        @livewire('reloj')
         <h2 class="mt-2 text-secondary text-center">Bienvenido al Control de Comedores</h2>
+        
         <hr>
-
+        
         <h4 class="text-secondary">Entregas de Hoy</h4>
 
         <div class="row mt-3">

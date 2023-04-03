@@ -13,9 +13,9 @@ class ReservaController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:clientes.index')->only('index');
-        $this->middleware('can:clientes.approve')->only('approved','approvedAll');
-        $this->middleware('can:clientes.destroy')->only('destroy');
+        $this->middleware('can:reservas.index')->only('index');
+        $this->middleware('can:reservas.approve')->only('approved','approvedAll');
+        $this->middleware('can:reservas.destroy')->only('destroy');
     }
 
     public function index()
